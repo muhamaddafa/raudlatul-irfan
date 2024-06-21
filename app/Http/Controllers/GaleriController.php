@@ -41,10 +41,9 @@ class GaleriController extends Controller
             $filePath = $file->storeAs('/public/files', $fileName);
 
             // Simpan nama file di database
-            $fileRecord = new Galeri();
-            $fileRecord->gambar_galeri = $fileName;
-            $fileRecord->save();
-
+            $galeri = Galeri::create([
+                'gambar_galeri' => $fileName
+            ]);
             return response()->json(['message' => 'File uploaded successfully'], 200);
         }
         return response()->json(['message' => 'Invalid file upload'], 400);

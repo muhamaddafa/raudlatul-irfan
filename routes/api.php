@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\GaleriController;
+use App\Models\Artikel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,20 +22,36 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/artikel', [ArtikelController::class, 'index']);
-Route::post('/artikel', [ArtikelController::class, 'store']);
-Route::get('/artikel/{id}', [ArtikelController::class, 'show']);
-Route::put('/artikel/{id}', [ArtikelController::class, 'update']);
-Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy']);
 
-Route::get('/galeri', [GaleriController::class, 'index']);
-Route::post('/galeri', [GaleriController::class, 'store']);
-Route::get('/galeri/{id}', [GaleriController::class, 'show']);
-Route::put('/galeri/{id}', [GaleriController::class, 'update']);
-Route::delete('/galeri/{id}', [GaleriController::class, 'destroy']);
+Route::controller(Artikel::class)->group(function (){
+    Route::get('/artikel', [ArtikelController::class, 'index']);
+    Route::get('/artikel/{id}', [ArtikelController::class, 'show']);
+    
+    // Route::middleware('auth')->group(function (){
+        Route::post('/artikel', [ArtikelController::class, 'store']);
+        Route::put('/artikel/{id}', [ArtikelController::class, 'update']);
+        Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy']);
+    // });
+});
 
-Route::get('/ekskul', [EkskulController::class, 'index']);
-Route::post('/ekskul', [EkskulController::class, 'store']);
-Route::get('/ekskul/{id}', [EkskulController::class, 'show']);
-Route::put('/ekskul/{id}', [EkskulController::class, 'update']);
-Route::delete('/ekskul/{id}', [EkskulController::class, 'destroy']);
+Route::controller(GaleriController::class)->group(function (){
+    Route::get('/galeri', 'index');
+    Route::get('/galeri/{id}', 'show');
+
+    // Route::middleware('auth')->group(function (){
+        Route::post('/galeri', 'store');
+        Route::put('/galeri/{id}', 'update');
+        Route::delete('/galeri/{id}', 'destroy');
+    // });
+});
+
+Route::controller(EkskulController::class)->group(function () {
+    Route::get('/ekskul', 'index');
+    Route::get('/ekskul/{id}', 'show');
+
+    // Route::middleware('auth')->group(function () {
+        Route::post('/ekskul', 'store');
+        Route::put('/ekskul/{id}', 'update');
+        Route::delete('/ekskul/{id}', 'destroy');
+    // });
+});
