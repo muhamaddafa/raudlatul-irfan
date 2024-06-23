@@ -36,7 +36,7 @@ class EkskulController extends Controller
             'gambar_ekskul' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        if ($request->file('gambar_galeri')->isValid()) {
+        if ($request->file('gambar_ekskul')->isValid()) {
             $file = $request->file('gambar_galeri');
             $fileName = time() . '_' . $file->getClientOriginalName();
             $filePath = $file->storeAs('/public/files', $fileName); //nyimpen gambar di storage
@@ -46,7 +46,7 @@ class EkskulController extends Controller
                 'gambar_ekskul' => $fileName
             ]);
 
-            return response()->json(['message' => 'File uploaded successfully'], 200);
+            return response()->json(['message' => 'File uploaded successfully']);
         }
         return response()->json(['message' => 'Invalid file upload'], 400);
     }
