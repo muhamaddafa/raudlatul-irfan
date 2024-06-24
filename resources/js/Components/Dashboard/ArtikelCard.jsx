@@ -45,7 +45,7 @@ const ArtikelCard = ({ data, key }) => {
                 <div className="flex flex-col gap-1 opacity-30 upload-info">
                     <div className="flex items-center gap-1 user">
                         <UserIcon className="w-4 h-4" />
-                        <p className="text-sm">{data.author_artikel}</p>
+                        <p className="text-sm">{data.penulis}</p>
                     </div>
                     <div className="flex items-center gap-1 timestamp">
                         <ClockIcon className="w-4 h-4" />

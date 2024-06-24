@@ -35,7 +35,7 @@ const EkskulCard = ({ data, key }) => {
                 <div className="flex flex-col items-center gap-1 opacity-30 upload-info">
                     <div className="flex items-center gap-1 user">
                         <UserIcon className="w-4 h-4" />
-                        <p className="text-sm">{data.author_ekskul}</p>
+                        <p className="text-sm">{data.pembuat}</p>
                     </div>
                     <div className="flex items-center gap-1 timestamp">
                         <ClockIcon className="w-4 h-4" />
