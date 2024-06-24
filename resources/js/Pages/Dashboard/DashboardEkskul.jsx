@@ -13,7 +13,7 @@ const DashboardEkskul = (props) => {
                 </h2>
             }
         >
-            <Head title="Artikel Dashboard" />
+            <Head title="Ekstrakurikuler Dashboard" />
 
             <div className="py-5">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
