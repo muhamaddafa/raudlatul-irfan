@@ -23,35 +23,35 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::controller(Artikel::class)->group(function (){
-    Route::get('/artikel', [ArtikelController::class, 'index']);
-    Route::get('/artikel/{id}', [ArtikelController::class, 'show']);
+Route::controller(ArtikelController::class)->group(function (){
+    Route::get('/artikel', 'index');
+    Route::get('/artikel/{artikel}', 'show');
     
     // Route::middleware('auth')->group(function (){
-        Route::post('/artikel', [ArtikelController::class, 'store']);
-        Route::put('/artikel/{id}', [ArtikelController::class, 'update']);
-        Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy']);
+        Route::post('/artikel', 'store');
+        Route::put('/artikel/{artikel}', 'update');
+        Route::delete('/artikel/{artikel}', 'destroy');
     // });
 });
 
 Route::controller(GaleriController::class)->group(function (){
     Route::get('/galeri', 'index');
-    Route::get('/galeri/{id}', 'show');
+    Route::get('/galeri/{galeri}', 'show');
 
     // Route::middleware('auth')->group(function (){
         Route::post('/galeri', 'store');
-        Route::put('/galeri/{id}', 'update');
-        Route::delete('/galeri/{id}', 'destroy');
+        Route::put('/galeri/{galeri}', 'update');
+        Route::delete('/galeri/{galeri}', 'destroy');
     // });
 });
 
 Route::controller(EkskulController::class)->group(function () {
     Route::get('/ekskul', 'index');
-    Route::get('/ekskul/{id}', 'show');
+    Route::get('/ekskul/{ekskul}', 'show');
 
     // Route::middleware('auth')->group(function () {
         Route::post('/ekskul', 'store');
-        Route::put('/ekskul/{id}', 'update');
-        Route::delete('/ekskul/{id}', 'destroy');
+        Route::put('/ekskul/{ekskul}', 'update');
+        Route::delete('/ekskul/{ekskul}', 'destroy');
     // });
 });

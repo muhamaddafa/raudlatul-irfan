@@ -90,10 +90,7 @@ class EkskulController extends Controller
                     'nama_ekskul' => $validatedData['nama_eskul'],
                     'gambar_ekskul' => $fileName
                 ]);
-    
-                $ekskul->gambar_ekskul = $fileName;
             }
-            $ekskul->save();
             return response()->json(['message' => 'File uploaded successfully'], 200);
     
             return response()->json(['message' => 'Ekskul updated successfully', 'ekskul' => $ekskul], 200);

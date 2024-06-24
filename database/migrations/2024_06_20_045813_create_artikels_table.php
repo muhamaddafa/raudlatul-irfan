@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('artikels', function (Blueprint $table) {
             $table->id();
             $table->string('kategori_artikel');
+            $table->string('penulis');
             $table->string('judul_artikel');
             $table->text('isi_artikel');
             $table->string('gambar_artikel');
