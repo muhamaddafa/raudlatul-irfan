@@ -36,11 +36,11 @@ Route::controller(ArtikelController::class)->group(function (){
 
 Route::controller(GaleriController::class)->group(function (){
     Route::get('/galeri', 'index');
-    Route::get('/galeri/{galeri}', 'show');
+    // Route::get('/galeri/{galeri}', 'show');
 
     // Route::middleware('auth')->group(function (){
         Route::post('/galeri', 'store');
-        Route::put('/galeri/{galeri}', 'update');
+        // Route::put('/galeri/{galeri}', 'update');
         Route::delete('/galeri/{galeri}', 'destroy');
     // });
 });

@@ -15,11 +15,14 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        try{
+        try {
             $artikels = Artikel::all();
             return response()->json($artikels);
-        }catch(\Exception){
-            return response()->json(["error" => "failed to fetch"]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to fetch articles',
+                'message' => $e->getMessage() 
+            ], 500);
         }
     }
 
@@ -36,31 +39,41 @@ class ArtikelController extends Controller
      */
     public function store(StoreArtikelRequest $request)
     {
-        $validatedData = $request->validate([
-            'kategori_artikel' => 'required|string',
-            'penulis' => 'required|string',
-            'judul_artikel' => 'required|string',
-            'isi_artikel' => 'required|string',
-            'gambar_artikel' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-        if ($request->file('gambar_artikel')->isValid()) {
-            $file = $request->file('gambar_artikel');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('/public/files', $fileName); 
-
-            $link = Hash::make('judul_artikel');
-            $artikel = Artikel::create([
-                'kategori_artikel' => $validatedData['kategori_artikel'],
-                'penulis' => $validatedData['kategori_artikel'],
-                'judul_artikel' => $validatedData['kategori_artikel'],
-                'isi_artikel' => $validatedData['kategori_artikel'],
-                'gambar_artikel' => $fileName,
-                'link_artikel' => $link
+        try {
+            $validatedData = $request->validate([
+                'kategori_artikel' => 'required|string',
+                'penulis' => 'required|string',
+                'judul_artikel' => 'required|string',
+                'isi_artikel' => 'required|string',
+                'gambar_artikel' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
+
+            if ($request->file('gambar_artikel')->isValid()) {
+                $file = $request->file('gambar_artikel');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('/public/artikel', $fileName); 
+
+                $link = Hash::make($validatedData['judul_artikel']);
+
+                // Simpan artikel ke database
+                $artikel = Artikel::create([
+                    'kategori_artikel' => $validatedData['kategori_artikel'],
+                    'penulis' => $validatedData['penulis'],
+                    'judul_artikel' => $validatedData['judul_artikel'],
+                    'isi_artikel' => $validatedData['isi_artikel'],
+                    'gambar_artikel' => $fileName,
+                    'link_artikel' => $link
+                ]);
+            } else {
+                return response()->json(['error' => 'File gambar artikel tidak valid'], 400);
+            }
+
+            return response()->json(['message' => 'Berhasil menambah artikel'], 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat menambah artikel', 'message' => $e->getMessage()], 500);
         }
-        return response()->json(['message' => 'berhasil menambah artikel']);
     }
+
 
     /**
      * Display the specified resource.
@@ -68,9 +81,16 @@ class ArtikelController extends Controller
     public function show(Artikel $artikel)
     {
         try {
+            if (!$artikel) {
+                return response()->json(['error' => 'Artikel tidak ditemukan'], 404);
+            }
+            
             return response()->json($artikel, 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Terjadi kesalahan saat menampilkan artikel', 'message' => $e->getMessage()], 500);
+            return response()->json([
+                'error' => 'Terjadi kesalahan saat menampilkan artikel',
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
@@ -98,26 +118,36 @@ class ArtikelController extends Controller
 
             if ($request->hasFile('gambar_artikel') && $request->file('gambar_artikel')->isValid()) {
                 if ($artikel->gambar_artikel) {
-                    $oldFilePath = storage_path('app/public/files/' . $artikel->gambar_artikel);
+                    $oldFilePath = storage_path('app/public/artikel/' . $artikel->gambar_artikel);
                     if (file_exists($oldFilePath)) {
                         unlink($oldFilePath);
                     }
                 }
 
+                // Upload gambar baru
                 $file = $request->file('gambar_artikel');
                 $fileName = time() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('public/files', $fileName);
+                $filePath = $file->storeAs('public/artikel', $fileName);
 
                 $validatedData['gambar_artikel'] = $fileName;
+            } else {
+                unset($validatedData['gambar_artikel']);
             }
 
             $artikel->update($validatedData);
 
-            return response()->json(['message' => 'Artikel berhasil diperbarui', 'artikel' => $artikel], 200);
+            return response()->json([
+                'message' => 'Artikel berhasil diperbarui',
+                'artikel' => $artikel
+            ], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Terjadi kesalahan saat memperbarui artikel', 'message' => $e->getMessage()], 500);
+            return response()->json([
+                'error' => 'Terjadi kesalahan saat memperbarui artikel',
+                'message' => $e->getMessage()
+            ], 500);
         }
-    }   
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -126,7 +156,7 @@ class ArtikelController extends Controller
     {
         try {
             if ($artikel->gambar_artikel) {
-                $filePath = storage_path('app/public/files/' . $artikel->gambar_artikel);
+                $filePath = storage_path('app/public/artikel/' . $artikel->gambar_artikel);
                 if (file_exists($filePath)) {
                     unlink($filePath);
                 } else {
@@ -138,7 +168,10 @@ class ArtikelController extends Controller
     
             return response()->json(['message' => 'Artikel berhasil dihapus'], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Terjadi kesalahan saat menghapus artikel', 'message' => $e->getMessage()], 500);
+            return response()->json([
+                'error' => 'Terjadi kesalahan saat menghapus artikel', 
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 }

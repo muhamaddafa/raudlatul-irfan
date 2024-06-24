@@ -14,8 +14,15 @@ class GaleriController extends Controller
      */
     public function index()
     {
-        $galeri = Galeri::all();
-        return response()->json($galeri);
+        try {
+            $galeris = Galeri::all();
+            return response()->json($galeris);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to fetch galeris',
+                'message' => $e->getMessage() 
+            ], 500);
+        }
     }
 
     /**
@@ -31,23 +38,34 @@ class GaleriController extends Controller
      */
     public function store(StoreGaleriRequest $request)
     {
-        $validateData = $request->validate([
-            'gambar_galeri' => 'required|image|mimes:jpeg,png'
-        ]); 
-
-        if ($request->file('gambar_galeri')->isValid()) {
-            $file = $request->file('gambar_galeri');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('/public/files', $fileName);
-
-            // Simpan nama file di database
-            $galeri = Galeri::create([
-                'gambar_galeri' => $fileName
+        try {
+            $validateData = $request->validate([
+                'gambar_galeri' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);
-            return response()->json(['message' => 'File uploaded successfully'], 200);
+    
+            if ($request->file('gambar_galeri')->isValid()) {
+                $file = $request->file('gambar_galeri');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('public/galeri', $fileName);
+    
+                // Simpan nama file di database
+                $galeri = Galeri::create([
+                    'gambar_galeri' => $fileName
+                ]);
+    
+                return response()->json([
+                    'message' => 'File uploaded successfully', 
+                    'galeri' => $galeri
+                ], 200);
+                
+            } else {
+                return response()->json(['error' => 'Invalid file upload'], 400);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to store galeri', 'message' => $e->getMessage()], 500);
         }
-        return response()->json(['message' => 'Invalid file upload'], 400);
     }
+    
 
     /**
      * Display the specified resource.
@@ -76,15 +94,26 @@ class GaleriController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UpdateGaleriRequest $request)
+    public function destroy(Galeri $galeri)
     {
-        try{
-            $galeri = Galeri::findorfail($request->id);
+        try {
+            if ($galeri->gambar_galeri) {
+                $filePath = storage_path('app/public/galeri/' . $galeri->gambar_galeri);
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                } else {
+                    return response()->json(['error' => 'Gambar artikel tidak ditemukan'], 404);
+                }
+            }
+    
             $galeri->delete();
-            return response()->json(['message' => 'berhasil menghapus foto dengan id $request->id']);
-        }
-        catch(\Exception $e){
-            return response()->json(['error' => 'gagal menghapus foto'], 500);
+    
+            return response()->json(['message' => 'Galeri berhasil dihapus'], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Terjadi kesalahan saat menghapus galeri', 
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 }
