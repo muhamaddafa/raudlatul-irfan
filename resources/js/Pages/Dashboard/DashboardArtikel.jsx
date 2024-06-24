@@ -26,7 +26,7 @@ const DashboardArtikel = (props) => {
 
                         {/* content */}
                         <div className="grid grid-cols-12 gap-4 px-6 content">
-                            {!props.data ? (
+                            {!props.data || props.data.length === 0 ? (
                                 <p className="col-span-12 p-24 text-2xl text-center opacity-25">
                                     Belum ada artikel yang diunggah..
                                 </p>
