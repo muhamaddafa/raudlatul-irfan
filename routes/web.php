@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Models\Artikel;
+use App\Models\Galeri;
 use Inertia\Inertia;
 
 /*
@@ -16,7 +19,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -25,31 +28,13 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/', function () {
+    return Inertia::render('Home', ['artikel' => Artikel::latest()->take(3)->get()]);
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    // Main Dashboard
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-
-    // Artikel Dashboard
-    Route::get('/dashboard/artikel', function() {
-        return Inertia::render('Dashboard/DashboardArtikel');
-    })->name('dashboard.artikel');
-
-    // Galeri Dashboard
-    Route::get('/dashboard/galeri', function() {
-        return Inertia::render('Dashboard/DashboardGaleri');
-    })->name('dashboard.galeri');
-
-    // Ekstrakurikuler Dashboard
-    Route::get('/dashboard/ekstrakurikuler', function() {
-        return Inertia::render('Dashboard/DashboardEkskul');
-    })->name('dashboard.ekskul');
-});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -57,4 +42,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
