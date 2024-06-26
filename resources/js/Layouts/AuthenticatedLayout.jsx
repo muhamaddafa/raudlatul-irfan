@@ -32,9 +32,9 @@ export default function Authenticated({ user, header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
-                                    href={route("dashboard_artikel")}
+                                    href={route("dashboard.artikel")}
                                     active={route().current(
-                                        "dashboard_artikel"
+                                        "dashboard.artikel"
                                     )}
                                 >
                                     Artikel
@@ -43,8 +43,8 @@ export default function Authenticated({ user, header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
-                                    href={route("dashboard_ekskul")}
-                                    active={route().current("dashboard_ekskul")}
+                                    href={route("dashboard.ekskul")}
+                                    active={route().current("dashboard.ekskul")}
                                 >
                                     Ekstrakurikuler
                                 </NavLink>
@@ -52,8 +52,8 @@ export default function Authenticated({ user, header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
-                                    href={route("dashboard_galeri")}
-                                    active={route().current("dashboard_galeri")}
+                                    href={route("dashboard.galeri")}
+                                    active={route().current("dashboard.galeri")}
                                 >
                                     Galeri
                                 </NavLink>
