@@ -2,7 +2,7 @@ import { UserIcon, ClockIcon } from "@heroicons/react/24/outline";
 import CardEditButton from "./CardEditButton";
 import CardDeleteButton from "./CardDeleteButton";
 
-const ArtikelCard = ({ data, key }) => {
+const ArtikelCard = ({ data, index }) => {
     const dateOptions = {
         year: "numeric",
         month: "long",
@@ -19,11 +19,11 @@ const ArtikelCard = ({ data, key }) => {
     return (
         <div
             className="col-span-3 border-[#00923F] border-opacity-35 border hover:border-2 hover:border-opacity-100 hover:-translate-y-2 duration-300 rounded-lg shadow-xl artikel-card"
-            key={key}
+            key={index}
         >
             <div className="flex flex-col gap-3 p-4 card-content">
                 <img
-                    src={`../../../../storage/img/${data.gambar_artikel}`}
+                    src={`../storage/artikel/${data.gambar_artikel}`}
                     alt="artikel-image"
                     className="object-cover w-full h-full rounded-md"
                 />
