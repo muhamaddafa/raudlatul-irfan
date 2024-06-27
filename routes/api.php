@@ -39,7 +39,7 @@ Route::controller(GaleriController::class)->group(function (){
     // Route::get('/galeri/{galeri}', 'show');
 
     // Route::middleware('auth')->group(function (){
-        Route::post('/galeri', 'store');
+        Route::post('/galeri', 'store')->name('galeri.store');
         // Route::put('/galeri/{galeri}', 'update');
         Route::delete('/galeri/{galeri}', 'destroy');
     // });

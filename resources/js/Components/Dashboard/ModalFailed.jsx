@@ -20,13 +20,13 @@ const ModalFailed = ({ item, message }) => {
                     </div>
                     <div className="flex w-full gap-2 button">
                         <a
-                            href={route("form.artikel")}
+                            href={route("form." + item.toLowerCase())}
                             className="w-2/5 py-2 text-white justify-center items-center flex bg-[#00923F] rounded-md hover:bg-[#007429]"
                         >
                             Ulangi
                         </a>
                         <a
-                            href={route("dashboard.artikel")}
+                            href={route("dashboard." + item.toLowerCase())}
                             className="w-full py-2 text-[#00923F] hover:text-white text-center border-[#00923F] border-2 rounded-md hover:bg-[#007429]"
                         >
                             Kembali ke Dashboard

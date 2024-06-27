@@ -22,7 +22,7 @@ const ModalSuccess = ({ item, feature }) => {
                         </p>
                     </div>
                     <a
-                        href={route("dashboard.artikel")}
+                        href={route("dashboard." + item.toLowerCase())}
                         className="w-full py-2 text-white text-center bg-[#00923F] rounded-md hover:bg-[#007429]"
                     >
                         Kembali ke Dashboard

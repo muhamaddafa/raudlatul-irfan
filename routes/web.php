@@ -46,9 +46,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('form.artikel');
 
     // Galeri Dashboard
+    // index
     Route::get('/dashboard/galeri', function() {
         return Inertia::render('Dashboard/DashboardGaleri');
     })->name('dashboard.galeri');
+    //store
+    Route::get('/dashboard/tambah/galeri', function() {
+        return Inertia::render('Dashboard/Store/StoreGaleri');
+    })->name('form.galeri');
 
     // Ekstrakurikuler Dashboard
     Route::get('/dashboard/ekstrakurikuler', function() {

@@ -21,7 +21,7 @@ const DashboardGaleri = (props) => {
                     <div className="flex flex-col gap-5 py-5 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         {/* add button */}
                         <div className="grid grid-cols-12 px-6">
-                            <AddButton title="Foto" />
+                            <AddButton title="Foto" href={"form.galeri"} />
                         </div>
 
                         {/* content */}
