@@ -39,7 +39,7 @@ const DashboardArtikel = (props) => {
                     <div className="flex flex-col gap-5 py-5 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         {/* add button */}
                         <div className="grid grid-cols-12 px-6">
-                            <AddButton title="Artikel" />
+                            <AddButton title="Artikel" href={"form.artikel"} />
                         </div>
 
                         {/* content */}

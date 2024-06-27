@@ -3,6 +3,7 @@ import CardEditButton from "./CardEditButton";
 import CardDeleteButton from "./CardDeleteButton";
 
 const ArtikelCard = ({ data, index }) => {
+    // format date and time
     const dateOptions = {
         year: "numeric",
         month: "long",
@@ -16,6 +17,7 @@ const ArtikelCard = ({ data, index }) => {
         timeZone: "Asia/Jakarta",
         hour12: false,
     };
+
     return (
         <div
             className="col-span-3 border-[#00923F] border-opacity-35 border hover:border-2 hover:border-opacity-100 hover:-translate-y-2 duration-300 rounded-lg shadow-xl artikel-card"
@@ -25,7 +27,7 @@ const ArtikelCard = ({ data, index }) => {
                 <img
                     src={`../storage/artikel/${data.gambar_artikel}`}
                     alt="artikel-image"
-                    className="object-cover w-full h-full rounded-md"
+                    className="object-cover object-center w-full h-48 rounded-md"
                 />
                 <div className="kategori-artikel">
                     <p className="text-[#00923F] font-bold text-sm">
@@ -37,7 +39,7 @@ const ArtikelCard = ({ data, index }) => {
                         {data.judul_artikel}
                     </p>
                 </div>
-                <div className="isi-artikel">
+                <div className="h-16 isi-artikel">
                     <p className="text-sm font-bold line-clamp-3 opacity-40">
                         {data.isi_artikel}
                     </p>

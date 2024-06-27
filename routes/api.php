@@ -28,7 +28,7 @@ Route::controller(ArtikelController::class)->group(function (){
     Route::get('/artikel/{artikel}', 'show');
     
     // Route::middleware('auth')->group(function (){
-        Route::post('/artikel', 'store');
+        Route::post('/artikel', 'store')->name('artikel.store');
         Route::put('/artikel/{artikel}', 'update');
         Route::delete('/artikel/{artikel}', 'destroy');
     // });

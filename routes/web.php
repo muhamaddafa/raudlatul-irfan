@@ -36,9 +36,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     // Artikel Dashboard
+    // index
     Route::get('/dashboard/artikel', function() {
         return Inertia::render('Dashboard/DashboardArtikel');
     })->name('dashboard.artikel');
+    // store
+    Route::get('/dashboard/tambah/artikel', function() {
+        return Inertia::render('Dashboard/Store/StoreArtikel');
+    })->name('form.artikel');
 
     // Galeri Dashboard
     Route::get('/dashboard/galeri', function() {
