@@ -69,7 +69,6 @@ const ArtikelCard = ({ data, index, loading }) => {
                     <CardDeleteButton
                         href={"artikel.destroy"}
                         data={data}
-                        item={"artikel"}
                         loading={loading}
                     />
                 </div>

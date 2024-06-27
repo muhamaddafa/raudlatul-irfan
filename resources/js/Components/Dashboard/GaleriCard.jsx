@@ -1,10 +1,10 @@
 import CardDeleteButton from "./CardDeleteButton";
 
-const GaleriCard = ({ data, key }) => {
+const GaleriCard = ({ data, index, loading }) => {
     return (
         <div
             className="col-span-3 border-[#00923F] border-opacity-35 border hover:border-2 hover:border-opacity-100 hover:-translate-y-2 duration-300 rounded-lg shadow-xl artikel-card"
-            key={key}
+            key={index}
         >
             <div className="flex flex-col gap-3 p-4 card-content">
                 <img
@@ -13,7 +13,11 @@ const GaleriCard = ({ data, key }) => {
                     className="object-cover w-full h-48 rounded-md"
                 />
                 <div className="flex gap-3 pt-2 edit-delete">
-                    <CardDeleteButton />
+                    <CardDeleteButton
+                        href={"galeri.destroy"}
+                        data={data}
+                        loading={loading}
+                    />
                 </div>
             </div>
         </div>

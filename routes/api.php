@@ -41,7 +41,7 @@ Route::controller(GaleriController::class)->group(function (){
     // Route::middleware('auth')->group(function (){
         Route::post('/galeri', 'store')->name('galeri.store');
         // Route::put('/galeri/{galeri}', 'update');
-        Route::delete('/galeri/{galeri}', 'destroy');
+        Route::delete('/galeri/{galeri}', 'destroy')->name('galeri.destroy');
     // });
 });
 
