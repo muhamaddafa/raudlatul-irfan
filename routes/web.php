@@ -56,9 +56,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('form.galeri');
 
     // Ekstrakurikuler Dashboard
-    Route::get('/dashboard/ekstrakurikuler', function() {
+    // index
+    Route::get('/dashboard/ekskul', function() {
         return Inertia::render('Dashboard/DashboardEkskul');
     })->name('dashboard.ekskul');
+    // store
+    Route::get('/dashboard/tambah/ekskul', function() {
+        return Inertia::render('Dashboard/Store/StoreEkskul');
+    })->name('form.ekskul');
 });
 
 Route::middleware('auth')->group(function () {

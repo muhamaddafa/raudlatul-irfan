@@ -46,11 +46,11 @@ Route::controller(GaleriController::class)->group(function (){
 });
 
 Route::controller(EkskulController::class)->group(function () {
-    Route::get('/ekskul', 'index');
+    Route::get('/ekskul', 'index')->name('ekskul.index');
     Route::get('/ekskul/{ekskul}', 'show');
 
     // Route::middleware('auth')->group(function () {
-        Route::post('/ekskul', 'store');
+        Route::post('/ekskul', 'store')->name('ekskul.store');
         Route::put('/ekskul/{ekskul}', 'update');
         Route::delete('/ekskul/{ekskul}', 'destroy');
     // });
