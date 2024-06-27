@@ -35,7 +35,7 @@ Route::controller(ArtikelController::class)->group(function (){
 });
 
 Route::controller(GaleriController::class)->group(function (){
-    Route::get('/galeri', 'index');
+    Route::get('/galeri', 'index')->name('galeri.index');
     // Route::get('/galeri/{galeri}', 'show');
 
     // Route::middleware('auth')->group(function (){

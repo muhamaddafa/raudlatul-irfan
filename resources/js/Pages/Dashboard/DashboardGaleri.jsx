@@ -2,8 +2,25 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import AddButton from "@/Components/Dashboard/AddButton";
 import GaleriCard from "@/Components/Dashboard/GaleriCard";
+import { useEffect, useState } from "react";
 
 const DashboardGaleri = (props) => {
+    const [galeriData, setGaleriData] = useState([]);
+
+    // request galeri data
+    const getGaleri = async () => {
+        try {
+            const response = await axios.get(route("galeri.index"));
+            setGaleriData(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    // get galeri data
+    useEffect(() => {
+        getGaleri();
+    }, []);
+
     return (
         <AuthenticatedLayout
             user={props.auth.user}
@@ -26,12 +43,12 @@ const DashboardGaleri = (props) => {
 
                         {/* content */}
                         <div className="grid grid-cols-12 gap-4 px-6 content">
-                            {!props.data || props.data.length === 0 ? (
+                            {!galeriData || galeriData.length === 0 ? (
                                 <p className="col-span-12 p-24 text-2xl text-center opacity-25">
                                     Belum ada foto yang diunggah..
                                 </p>
                             ) : (
-                                props.data.map((data, key) => (
+                                galeriData.map((data, key) => (
                                     <GaleriCard data={data} key={key} />
                                 ))
                             )}

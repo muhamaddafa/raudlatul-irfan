@@ -8,7 +8,7 @@ const GaleriCard = ({ data, key }) => {
         >
             <div className="flex flex-col gap-3 p-4 card-content">
                 <img
-                    src={`../../../../storage/img/${data.gambar_galeri}`}
+                    src={`../storage/galeri/${data.gambar_galeri}`}
                     alt="artikel-image"
                     className="object-cover w-full h-48 rounded-md"
                 />
