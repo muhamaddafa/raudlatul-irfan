@@ -67,7 +67,7 @@ const DashboardArtikel = (props) => {
                                 artikelData.map((data, index) => (
                                     <ArtikelCard
                                         data={data}
-                                        key={index}
+                                        index={index}
                                         loading={setStatus}
                                     />
                                 ))
