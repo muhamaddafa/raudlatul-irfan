@@ -2,7 +2,7 @@ import { UserIcon, ClockIcon } from "@heroicons/react/24/outline";
 import CardEditButton from "./CardEditButton";
 import CardDeleteButton from "./CardDeleteButton";
 
-const ArtikelCard = ({ data, index }) => {
+const ArtikelCard = ({ data, index, loading }) => {
     // format date and time
     const dateOptions = {
         year: "numeric",
@@ -66,7 +66,12 @@ const ArtikelCard = ({ data, index }) => {
                 </div>
                 <div className="flex gap-3 pt-2 edit-delete">
                     <CardEditButton />
-                    <CardDeleteButton />
+                    <CardDeleteButton
+                        href={"artikel.destroy"}
+                        data={data}
+                        item={"artikel"}
+                        loading={loading}
+                    />
                 </div>
             </div>
         </div>

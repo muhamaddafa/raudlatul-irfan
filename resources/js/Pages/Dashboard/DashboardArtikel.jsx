@@ -4,9 +4,12 @@ import AddButton from "@/Components/Dashboard/AddButton";
 import ArtikelCard from "@/Components/Dashboard/ArtikelCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ModalLoading from "@/Components/Dashboard/ModalLoading";
+import ModalSuccess from "@/Components/Dashboard/ModalSuccess";
 
 const DashboardArtikel = (props) => {
     const [artikelData, setArtikelData] = useState([]);
+    const [status, setStatus] = useState("");
 
     // request artikel data
     const getArtikel = async () => {
@@ -33,6 +36,18 @@ const DashboardArtikel = (props) => {
         >
             <Head title="Artikel Dashboard" />
 
+            {/* Modal Status */}
+            {status === "loading" && (
+                <ModalLoading
+                    item="Artikel"
+                    status={"Menghapus..."}
+                    message={"sedang dihapus dari database!"}
+                />
+            )}
+            {status === "success" && (
+                <ModalSuccess item="Artikel" feature={"hapus"} />
+            )}
+
             <div className="py-5">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     {/* Dashboard Content */}
@@ -50,7 +65,11 @@ const DashboardArtikel = (props) => {
                                 </p>
                             ) : (
                                 artikelData.map((data, index) => (
-                                    <ArtikelCard data={data} key={index} />
+                                    <ArtikelCard
+                                        data={data}
+                                        key={index}
+                                        loading={setStatus}
+                                    />
                                 ))
                             )}
                         </div>

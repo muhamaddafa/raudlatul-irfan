@@ -66,8 +66,16 @@ const StoreArtikel = (props) => {
             <Head title="Tambah Artikel" />
 
             {/* Modal Status */}
-            {status === "loading" && <ModalLoading item="Artikel" />}
-            {status === "success" && <ModalSuccess item="Artikel" />}
+            {status === "loading" && (
+                <ModalLoading
+                    item="Artikel"
+                    status={"Mengunggah..."}
+                    message={"sedang ditambahkan ke database!"}
+                />
+            )}
+            {status === "success" && (
+                <ModalSuccess item="Artikel" feature={"tambah"} />
+            )}
             {status === "failed" && (
                 <ModalFailed item="Artikel" message={message} />
             )}

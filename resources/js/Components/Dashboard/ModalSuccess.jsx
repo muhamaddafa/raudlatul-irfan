@@ -1,6 +1,10 @@
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 
-const ModalSuccess = ({ item }) => {
+const ModalSuccess = ({ item, feature }) => {
+    if (feature === "tambah") feature = "Ditambahkan!";
+    if (feature === "hapus") feature = "Dihapus!";
+    if (feature === "edit") feature = "Diubah!";
+
     return (
         <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 modal"
@@ -14,7 +18,7 @@ const ModalSuccess = ({ item }) => {
                             Sukses
                         </h2>
                         <p className="opacity-50">
-                            {item} Berhasil Ditambahkan!
+                            {item} Berhasil {feature}
                         </p>
                     </div>
                     <a
