@@ -4,9 +4,12 @@ import AddButton from "@/Components/Dashboard/AddButton";
 import EkskulCard from "@/Components/Dashboard/EkskulCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ModalLoading from "@/Components/Dashboard/ModalLoading";
+import ModalSuccess from "@/Components/Dashboard/ModalSuccess";
 
 const DashboardEkskul = (props) => {
     const [ekskulData, setEkskulData] = useState([]);
+    const [status, setStatus] = useState("");
 
     // request ekskul data
     const getEkskul = async () => {
@@ -33,6 +36,18 @@ const DashboardEkskul = (props) => {
         >
             <Head title="Ekstrakurikuler Dashboard" />
 
+            {/* Modal Status */}
+            {status === "loading" && (
+                <ModalLoading
+                    item="Ekskul"
+                    status={"Menghapus..."}
+                    message={"sedang dihapus dari database!"}
+                />
+            )}
+            {status === "success" && (
+                <ModalSuccess item="Ekskul" feature={"hapus"} />
+            )}
+
             <div className="py-5">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     {/* Dashboard Content */}
@@ -53,7 +68,11 @@ const DashboardEkskul = (props) => {
                                 </p>
                             ) : (
                                 ekskulData.map((data, index) => (
-                                    <EkskulCard data={data} index={index} />
+                                    <EkskulCard
+                                        data={data}
+                                        key={index}
+                                        loading={setStatus}
+                                    />
                                 ))
                             )}
                         </div>

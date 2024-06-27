@@ -52,6 +52,6 @@ Route::controller(EkskulController::class)->group(function () {
     // Route::middleware('auth')->group(function () {
         Route::post('/ekskul', 'store')->name('ekskul.store');
         Route::put('/ekskul/{ekskul}', 'update');
-        Route::delete('/ekskul/{ekskul}', 'destroy');
+        Route::delete('/ekskul/{ekskul}', 'destroy')->name('ekskul.destroy');
     // });
 });

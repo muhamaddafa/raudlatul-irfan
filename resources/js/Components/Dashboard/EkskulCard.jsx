@@ -2,7 +2,8 @@ import { UserIcon, ClockIcon } from "@heroicons/react/24/outline";
 import CardEditButton from "./CardEditButton";
 import CardDeleteButton from "./CardDeleteButton";
 
-const EkskulCard = ({ data, index }) => {
+const EkskulCard = ({ data, loading }) => {
+    // format date and time
     const dateOptions = {
         year: "numeric",
         month: "long",
@@ -17,10 +18,7 @@ const EkskulCard = ({ data, index }) => {
         hour12: false,
     };
     return (
-        <div
-            className="col-span-3 border-[#00923F] border-opacity-35 border hover:border-2 hover:border-opacity-100 hover:-translate-y-2 duration-300 rounded-lg shadow-xl artikel-card"
-            key={index}
-        >
+        <div className="col-span-3 border-[#00923F] border-opacity-35 border hover:border-2 hover:border-opacity-100 hover:-translate-y-2 duration-300 rounded-lg shadow-xl artikel-card">
             <div className="flex flex-col gap-3 p-4 card-content">
                 <img
                     src={`../storage/ekskul/${data.gambar_ekskul}`}
@@ -54,7 +52,11 @@ const EkskulCard = ({ data, index }) => {
                 </div>
                 <div className="flex gap-3 pt-2 edit-delete">
                     <CardEditButton />
-                    <CardDeleteButton />
+                    <CardDeleteButton
+                        href={"ekskul.destroy"}
+                        data={data}
+                        loading={loading}
+                    />
                 </div>
             </div>
         </div>
