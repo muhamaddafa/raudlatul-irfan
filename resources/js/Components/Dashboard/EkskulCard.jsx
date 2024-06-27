@@ -23,9 +23,9 @@ const EkskulCard = ({ data, index }) => {
         >
             <div className="flex flex-col gap-3 p-4 card-content">
                 <img
-                    src={`../../../../storage/img/${data.gambar_ekskul}`}
+                    src={`../storage/ekskul/${data.gambar_ekskul}`}
                     alt="artikel-image"
-                    className="object-cover w-full h-full rounded-md"
+                    className="object-cover w-full h-48 rounded-md"
                 />
                 <div className="judul-artikel">
                     <p className="text-xl font-bold text-center line-clamp-2">

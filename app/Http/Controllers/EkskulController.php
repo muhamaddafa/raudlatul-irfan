@@ -55,7 +55,7 @@ class EkskulController extends Controller
                 'gambar_ekskul' => $fileName
             ]);
 
-            return response()->json(['message' => 'File uploaded successfully']);
+            return response()->json(['message' => 'File uploaded successfully'], 200);
         }
         return response()->json(['message' => 'Invalid file upload'], 400);
     }
