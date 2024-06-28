@@ -6,6 +6,7 @@ use App\Models\Galeri;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGaleriRequest;
 use App\Http\Requests\UpdateGaleriRequest;
+use Illuminate\Validation\ValidationException;
 
 class GaleriController extends Controller
 {
@@ -38,17 +39,13 @@ class GaleriController extends Controller
      */
     public function store(StoreGaleriRequest $request)
     {
+        $validated = $request->validate($this->rules(), $this->messages());
         try {
-            $validateData = $request->validate([
-                'gambar_galeri' => 'required|image|mimes:jpeg,png,jpg|max:2048'
-            ]);
-    
-            if ($request->file('gambar_galeri')->isValid()) {
+            if ($request->file('gambar_galeri')) {
                 $file = $request->file('gambar_galeri');
                 $fileName = time() . '_' . $file->getClientOriginalName();
                 $filePath = $file->storeAs('public/galeri', $fileName);
     
-                // Simpan nama file di database
                 $galeri = Galeri::create([
                     'gambar_galeri' => $fileName
                 ]);
@@ -57,14 +54,23 @@ class GaleriController extends Controller
                     'message' => 'File uploaded successfully', 
                     'galeri' => $galeri
                 ], 200);
-                
             } else {
                 return response()->json(['error' => 'Invalid file upload'], 400);
             }
+        } catch (ValidationException $e) {
+            return response()->json([
+                'error' => 'Validation failed', 
+                'messages' => $e->errors()
+            ], 422);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to store galeri', 'message' => $e->getMessage()], 500);
+            return response()->json([
+                'error' => 'Failed to store galeri', 
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
+    
+
     
 
     /**

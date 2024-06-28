@@ -41,11 +41,7 @@ class ArtikelController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'kategori_artikel' => 'required|string',
-                'penulis' => 'required|string',
-                'judul_artikel' => 'required|string',
-                'isi_artikel' => 'required|string',
-                'gambar_artikel' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                
             ]);
 
             if ($request->file('gambar_artikel')->isValid()) {
@@ -105,16 +101,9 @@ class ArtikelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreArtikelRequest $request, Artikel $artikel)
+    public function update(UpdateArtikelRequest $request, Artikel $artikel)
     {
         try {
-            $validatedData = $request->validate([
-                'kategori_artikel' => 'sometimes|required|string',
-                'penulis' => 'sometimes|required|string',
-                'judul_artikel' => 'sometimes|required|string',
-                'isi_artikel' => 'sometimes|required|string',
-                'gambar_artikel' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
-            ]);
 
             if ($request->hasFile('gambar_artikel') && $request->file('gambar_artikel')->isValid()) {
                 if ($artikel->gambar_artikel) {

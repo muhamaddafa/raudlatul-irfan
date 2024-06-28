@@ -69,7 +69,6 @@ class EkskulController extends Controller
             if (!$ekskul) {
                 return response()->json(['error' => 'ekskul tidak ditemukan'], 404);
             }
-            
             return response()->json($ekskul, 200);
         } catch (\Exception $e) {
             return response()->json([

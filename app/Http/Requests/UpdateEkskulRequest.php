@@ -25,4 +25,11 @@ class UpdateEkskulRequest extends FormRequest
             //
         ];
     }
+
+    public function messages()
+    {
+        return [
+            
+        ];
+    }
 }
