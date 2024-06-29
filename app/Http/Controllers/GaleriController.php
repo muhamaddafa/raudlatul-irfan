@@ -39,17 +39,16 @@ class GaleriController extends Controller
      */
     public function store(StoreGaleriRequest $request)
     {
-        $validated = $request->validate($this->rules(), $this->messages());
         try {
             if ($request->file('gambar_galeri')) {
                 $file = $request->file('gambar_galeri');
                 $fileName = time() . '_' . $file->getClientOriginalName();
                 $filePath = $file->storeAs('public/galeri', $fileName);
-    
+
                 $galeri = Galeri::create([
                     'gambar_galeri' => $fileName
                 ]);
-    
+
                 return response()->json([
                     'message' => 'File uploaded successfully', 
                     'galeri' => $galeri
@@ -69,9 +68,6 @@ class GaleriController extends Controller
             ], 500);
         }
     }
-    
-
-    
 
     /**
      * Display the specified resource.

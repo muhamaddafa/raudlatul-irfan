@@ -38,37 +38,34 @@ class ArtikelController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreArtikelRequest $request)
-    {
-        try {
-            $validatedData = $request->validate([
-                
+{
+    try {
+        if ($request->hasFile('gambar_artikel') && $request->file('gambar_artikel')->isValid()) {
+            $file = $request->file('gambar_artikel');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('/public/artikel', $fileName); 
+
+            $link = Hash::make($request->judul_artikel);
+
+            // Simpan artikel ke database
+            $artikel = Artikel::create([
+                'kategori_artikel' => $request->kategori_artikel,
+                'penulis' => $request->penulis,
+                'judul_artikel' => $request->judul_artikel,
+                'isi_artikel' => $request->isi_artikel,
+                'gambar_artikel' => $fileName,
+                'link_artikel' => $link
             ]);
 
-            if ($request->file('gambar_artikel')->isValid()) {
-                $file = $request->file('gambar_artikel');
-                $fileName = time() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('/public/artikel', $fileName); 
-
-                $link = Hash::make($validatedData['judul_artikel']);
-
-                // Simpan artikel ke database
-                $artikel = Artikel::create([
-                    'kategori_artikel' => $validatedData['kategori_artikel'],
-                    'penulis' => $validatedData['penulis'],
-                    'judul_artikel' => $validatedData['judul_artikel'],
-                    'isi_artikel' => $validatedData['isi_artikel'],
-                    'gambar_artikel' => $fileName,
-                    'link_artikel' => $link
-                ]);
-            } else {
-                return response()->json(['error' => 'File gambar artikel tidak valid'], 400);
-            }
-
             return response()->json(['message' => 'Berhasil menambah artikel'], 201);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Terjadi kesalahan saat menambah artikel', 'message' => $e->getMessage()], 500);
+        } else {
+            return response()->json(['error' => 'File gambar artikel tidak valid'], 400);
         }
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Terjadi kesalahan saat menambah artikel', 'message' => $e->getMessage()], 500);
     }
+}
+
 
 
     /**
@@ -104,8 +101,10 @@ class ArtikelController extends Controller
     public function update(UpdateArtikelRequest $request, Artikel $artikel)
     {
         try {
+            $data = $request->all();
 
             if ($request->hasFile('gambar_artikel') && $request->file('gambar_artikel')->isValid()) {
+                // Hapus gambar lama jika ada
                 if ($artikel->gambar_artikel) {
                     $oldFilePath = storage_path('app/public/artikel/' . $artikel->gambar_artikel);
                     if (file_exists($oldFilePath)) {
@@ -113,21 +112,20 @@ class ArtikelController extends Controller
                     }
                 }
 
-                // Upload gambar baru
                 $file = $request->file('gambar_artikel');
                 $fileName = time() . '_' . $file->getClientOriginalName();
                 $filePath = $file->storeAs('public/artikel', $fileName);
 
-                $validatedData['gambar_artikel'] = $fileName;
+                $data['gambar_artikel'] = $fileName;
             } else {
-                unset($validatedData['gambar_artikel']);
+                unset($data['gambar_artikel']);
             }
 
-            $artikel->update($validatedData);
+            $artikel->update($data);
 
             return response()->json([
                 'message' => 'Artikel berhasil diperbarui',
-                'artikel' => $artikel
+                'data' => $artikel
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -136,7 +134,6 @@ class ArtikelController extends Controller
             ], 500);
         }
     }
-
 
     /**
      * Remove the specified resource from storage.

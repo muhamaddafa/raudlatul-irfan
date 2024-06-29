@@ -91,19 +91,15 @@ class EkskulController extends Controller
      */
     public function update(UpdateEkskulRequest $request, Ekskul $ekskul)
     {
-        $validatedData = $request->validate([
-            'nama_ekskul' => 'sometimes|required|string|max:64',
-            'pembuat' => 'sometimes|required|string',
-            'gambar_ekskul' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048'
-        ]);
-
         try {
+            $validatedData = $request->validated();
+
             if ($request->hasFile('gambar_ekskul') && $request->file('gambar_ekskul')->isValid()) {
                 $file = $request->file('gambar_ekskul');
                 $fileName = time() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('/public/ekskul', $fileName);
-
+                $filePath = $file->storeAs('public/ekskul', $fileName);
                 $ekskul->update([
+                    
                     'nama_ekskul' => $validatedData['nama_ekskul'],
                     'pembuat' => $validatedData['pembuat'],
                     'gambar_ekskul' => $fileName
@@ -114,7 +110,6 @@ class EkskulController extends Controller
                     'pembuat' => $validatedData['pembuat']
                 ]);
             }
-
             return response()->json([
                 'message' => 'Ekskul updated successfully',
                 'ekskul' => $ekskul
@@ -127,6 +122,7 @@ class EkskulController extends Controller
             ], 500);
         }
     }
+
 
     /**
      * Remove the specified resource from storage.
