@@ -29,7 +29,7 @@ Route::controller(ArtikelController::class)->group(function (){
     
     // Route::middleware('auth')->group(function (){
         Route::post('/artikel', 'store')->name('artikel.store');
-        Route::put('/artikel/{artikel}', 'update');
+        Route::put('/artikel/{artikel}', 'update')->name('artikel.update');
         Route::delete('/artikel/{artikel}', 'destroy')->name('artikel.destroy');
     // });
 });

@@ -54,6 +54,7 @@ class ArtikelController extends Controller
                 $filePath = $file->storeAs('/public/artikel', $fileName); 
 
                 $link = Hash::make($validatedData['judul_artikel']);
+                $link = str_replace('/', '', $link);
 
                 // Simpan artikel ke database
                 $artikel = Artikel::create([
@@ -106,7 +107,7 @@ class ArtikelController extends Controller
      * Update the specified resource in storage.
      */
     public function update(StoreArtikelRequest $request, Artikel $artikel)
-    {
+    {   
         try {
             $validatedData = $request->validate([
                 'kategori_artikel' => 'sometimes|required|string',

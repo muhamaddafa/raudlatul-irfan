@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Models\Artikel;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +46,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard/tambah/artikel', function() {
         return Inertia::render('Dashboard/Store/StoreArtikel');
     })->name('form.artikel');
+    // Edit
+    Route::get('/dashboard/artikel/{link_artikel}/edit', function($link_artikel) {
+        return Inertia::render('Dashboard/Update/EditArtikel', [
+            'artikel' => Artikel::where('link_artikel', $link_artikel)->first()
+        ]);
+    })->name('edit.artikel');
 
     // Galeri Dashboard
     // index
