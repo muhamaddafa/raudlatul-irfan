@@ -2,8 +2,29 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import AddButton from "@/Components/Dashboard/AddButton";
 import ArtikelCard from "@/Components/Dashboard/ArtikelCard";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import ModalLoading from "@/Components/Dashboard/ModalLoading";
+import ModalSuccess from "@/Components/Dashboard/ModalSuccess";
 
 const DashboardArtikel = (props) => {
+    const [artikelData, setArtikelData] = useState([]);
+    const [status, setStatus] = useState("");
+
+    // request artikel data
+    const getArtikel = async () => {
+        try {
+            const response = await axios.get(route("artikel.index"));
+            setArtikelData(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    // get artikel data
+    useEffect(() => {
+        getArtikel();
+    }, []);
+
     return (
         <AuthenticatedLayout
             user={props.auth.user}
@@ -15,24 +36,40 @@ const DashboardArtikel = (props) => {
         >
             <Head title="Artikel Dashboard" />
 
+            {/* Modal Status */}
+            {status === "loading" && (
+                <ModalLoading
+                    item="Artikel"
+                    status={"Menghapus..."}
+                    message={"sedang dihapus dari database!"}
+                />
+            )}
+            {status === "success" && (
+                <ModalSuccess item="Artikel" feature={"hapus"} />
+            )}
+
             <div className="py-5">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     {/* Dashboard Content */}
                     <div className="flex flex-col gap-5 py-5 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         {/* add button */}
                         <div className="grid grid-cols-12 px-6">
-                            <AddButton title="Artikel" />
+                            <AddButton title="Artikel" href={"form.artikel"} />
                         </div>
 
                         {/* content */}
                         <div className="grid grid-cols-12 gap-4 px-6 content">
-                            {!props.data || props.data.length === 0 ? (
+                            {!artikelData || artikelData.length === 0 ? (
                                 <p className="col-span-12 p-24 text-2xl text-center opacity-25">
                                     Belum ada artikel yang diunggah..
                                 </p>
                             ) : (
-                                props.data.map((data, key) => (
-                                    <ArtikelCard data={data} key={key} />
+                                artikelData.map((data, index) => (
+                                    <ArtikelCard
+                                        data={data}
+                                        key={index}
+                                        loading={setStatus}
+                                    />
                                 ))
                             )}
                         </div>

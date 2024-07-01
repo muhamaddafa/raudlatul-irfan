@@ -95,11 +95,19 @@ class EkskulController extends Controller
             $validatedData = $request->validated();
 
             if ($request->hasFile('gambar_ekskul') && $request->file('gambar_ekskul')->isValid()) {
+                if($ekskul->gambar_ekskul) {
+                    $oldFilePath = storage_path('app/public/ekskul/' . $ekskul->gambar_ekskul);
+                    if (file_exists($oldFilePath)) {
+                        unlink($oldFilePath);
+                    } else {
+                        return response()->json(['error' => 'Gambar ekskul tidak ditemukan'], 404);
+                    }
+                }
+
                 $file = $request->file('gambar_ekskul');
                 $fileName = time() . '_' . $file->getClientOriginalName();
                 $filePath = $file->storeAs('public/ekskul', $fileName);
                 $ekskul->update([
-                    
                     'nama_ekskul' => $validatedData['nama_ekskul'],
                     'pembuat' => $validatedData['pembuat'],
                     'gambar_ekskul' => $fileName

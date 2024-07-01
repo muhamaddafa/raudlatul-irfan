@@ -38,7 +38,7 @@ class ArtikelController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreArtikelRequest $request)
-{
+    {
     try {
         if ($request->hasFile('gambar_artikel') && $request->file('gambar_artikel')->isValid()) {
             $file = $request->file('gambar_artikel');
@@ -46,6 +46,7 @@ class ArtikelController extends Controller
             $filePath = $file->storeAs('/public/artikel', $fileName); 
 
             $link = Hash::make($request->judul_artikel);
+            $link = str_replace('/', '', $link);
 
             // Simpan artikel ke database
             $artikel = Artikel::create([
