@@ -6,10 +6,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Models\Artikel;
 use App\Models\Galeri;
-use Inertia\Inertia;
-
-use App\Models\Artikel;
 use App\Models\Ekskul;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
