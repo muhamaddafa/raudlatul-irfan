@@ -22,7 +22,18 @@ class UpdateArtikelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'kategori_artikel' => 'sometimes|required|string',
+            'penulis' => 'sometimes|required|string',
+            'judul_artikel' => 'sometimes|required|string',
+            'isi_artikel' => 'sometimes|required|string',
+            'gambar_artikel' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
+        ];
+    }
+
+     public function messages()
+    {
+        return [
+            
         ];
     }
 }

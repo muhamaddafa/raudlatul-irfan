@@ -25,4 +25,11 @@ class UpdateGaleriRequest extends FormRequest
             //
         ];
     }
+
+    public function messages()
+    {
+        return [
+            //
+        ];
+    }
 }

@@ -87,12 +87,12 @@ const EditArtikel = (props) => {
             {status === "loading" && (
                 <ModalLoading
                     item="Artikel"
-                    status={"Mengunggah..."}
-                    message={"sedang ditambahkan ke database!"}
+                    status={"Mengubah..."}
+                    message={"sedang diubah"}
                 />
             )}
             {status === "success" && (
-                <ModalSuccess item="Artikel" feature={"tambah"} />
+                <ModalSuccess item="Artikel" feature={"edit"} />
             )}
             {status === "failed" && (
                 <ModalFailed item="Artikel" message={message} />
