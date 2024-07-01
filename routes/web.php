@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Models\Artikel;
+use App\Models\Ekskul;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard/tambah/ekskul', function() {
         return Inertia::render('Dashboard/Store/StoreEkskul');
     })->name('form.ekskul');
+    // edit
+    Route::get('/dashboard/ekskul/{nama_ekskul}/edit', function($nama_ekskul) {
+        return Inertia::render('Dashboard/Update/EditEkskul', [
+            'ekskul' => Ekskul::where('nama_ekskul', $nama_ekskul)->first()
+        ]);
+    })->name('edit.ekskul');
 });
 
 Route::middleware('auth')->group(function () {

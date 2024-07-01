@@ -51,7 +51,7 @@ const EkskulCard = ({ data, loading }) => {
                     </div>
                 </div>
                 <div className="flex gap-3 pt-2 edit-delete">
-                    <CardEditButton />
+                    <CardEditButton data={data.nama_ekskul} item={"ekskul"} />
                     <CardDeleteButton
                         href={"ekskul.destroy"}
                         data={data}

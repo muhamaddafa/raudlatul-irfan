@@ -6,30 +6,46 @@ import { Head, useForm } from "@inertiajs/react";
 import axios from "axios";
 import { useState } from "react";
 
-const StoreEkskul = (props) => {
+const EditEkskul = (props) => {
+    const ekskul = props.ekskul;
+
     // status state
     const [status, setStatus] = useState("");
     const [message, setMessage] = useState("");
 
     // data state
     const { data, setData } = useForm({
-        nama_ekskul: "",
+        nama_ekskul: ekskul.nama_ekskul,
         pembuat: props.auth.user.name,
         gambar_ekskul: null,
     });
 
-    // store function
-    const store = (e) => {
+    // update function
+    const edit = (e) => {
         e.preventDefault();
         setStatus("loading");
+
+        const url = route("ekskul.update", {
+            ekskul: ekskul.id,
+        });
+
+        const formData = new FormData();
+
+        formData.append("_method", "put");
+        formData.append("nama_ekskul", data.nama_ekskul);
+        formData.append("pembuat", data.pembuat);
+        if (data.gambar_ekskul) {
+            formData.append("gambar_ekskul", data.gambar_ekskul);
+        }
+
         axios
-            .post(route("ekskul.store"), data, {
+            .post(url, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             })
             .then((response) => {
-                if (response.status === 201) {
+                if (response.status === 200) {
                     setStatus("success");
                 }
             })
@@ -57,29 +73,29 @@ const StoreEkskul = (props) => {
             user={props.auth.user}
             header={
                 <h2 className="text-xl font-semibold leading-tight text-center text-gray-800">
-                    Tambah Ekskul MAS Raudlatul Irfan
+                    Edit Ekskul MAS Raudlatul Irfan
                 </h2>
             }
         >
-            <Head title="Tambah Artikel" />
+            <Head title="Edit Ekskul" />
 
             {/* Modal Status */}
             {status === "loading" && (
                 <ModalLoading
                     item="Ekskul"
-                    status={"Mengunggah..."}
-                    message={"sedang ditambahkan ke database!"}
+                    status={"Mengubah..."}
+                    message={"sedang diubah"}
                 />
             )}
             {status === "success" && (
-                <ModalSuccess item="Ekskul" feature={"tambah"} />
+                <ModalSuccess item="Ekskul" feature={"edit"} />
             )}
             {status === "failed" && (
                 <ModalFailed item="Ekskul" message={message} />
             )}
 
             <div className="container relative w-3/5 px-4 mx-auto mt-5 max-w-7xl sm:px-6 lg:px-8">
-                <form onSubmit={store} className="flex flex-col gap-3">
+                <form onSubmit={edit} className="flex flex-col gap-3">
                     {/* nama ekskul */}
                     <div className="nama-ekskul">
                         <label
@@ -166,7 +182,7 @@ const StoreEkskul = (props) => {
                         type="submit"
                         className="w-full py-2 text-white bg-[#00923F] rounded-md hover:bg-[#007429]"
                     >
-                        Tambah Ekskul
+                        Edit Ekskul
                     </button>
                 </form>
             </div>
@@ -174,4 +190,4 @@ const StoreEkskul = (props) => {
     );
 };
 
-export default StoreEkskul;
+export default EditEkskul;

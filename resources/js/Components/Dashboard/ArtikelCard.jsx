@@ -62,7 +62,7 @@ const ArtikelCard = ({ data, loading }) => {
                     </div>
                 </div>
                 <div className="flex gap-3 pt-2 edit-delete">
-                    <CardEditButton data={data} />
+                    <CardEditButton data={data.link_artikel} item={"artikel"} />
                     <CardDeleteButton
                         href={"artikel.destroy"}
                         data={data}
