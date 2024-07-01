@@ -24,34 +24,34 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::controller(ArtikelController::class)->group(function (){
-    Route::get('/artikel', 'index');
+    Route::get('/artikel', 'index')->name('artikel.index');
     Route::get('/artikel/{artikel}', 'show');
     
     // Route::middleware('auth')->group(function (){
-        Route::post('/artikel', 'store');
-        Route::put('/artikel/{artikel}', 'update');
-        Route::delete('/artikel/{artikel}', 'destroy');
+        Route::post('/artikel', 'store')->name('artikel.store');
+        Route::put('/artikel/{artikel}', 'update')->name('artikel.update');
+        Route::delete('/artikel/{artikel}', 'destroy')->name('artikel.destroy');
     // });
 });
 
 Route::controller(GaleriController::class)->group(function (){
-    Route::get('/galeri', 'index');
+    Route::get('/galeri', 'index')->name('galeri.index');
     // Route::get('/galeri/{galeri}', 'show');
 
     // Route::middleware('auth')->group(function (){
-        Route::post('/galeri', 'store');
+        Route::post('/galeri', 'store')->name('galeri.store');
         // Route::put('/galeri/{galeri}', 'update');
-        Route::delete('/galeri/{galeri}', 'destroy');
+        Route::delete('/galeri/{galeri}', 'destroy')->name('galeri.destroy');
     // });
 });
 
 Route::controller(EkskulController::class)->group(function () {
-    Route::get('/ekskul', 'index');
+    Route::get('/ekskul', 'index')->name('ekskul.index');
     Route::get('/ekskul/{ekskul}', 'show');
 
     // Route::middleware('auth')->group(function () {
-        Route::post('/ekskul', 'store');
-        Route::put('/ekskul/{ekskul}', 'update');
-        Route::delete('/ekskul/{ekskul}', 'destroy');
+        Route::post('/ekskul', 'store')->name('ekskul.store');
+        Route::put('/ekskul/{ekskul}', 'update')->name('ekskul.update');
+        Route::delete('/ekskul/{ekskul}', 'destroy')->name('ekskul.destroy');
     // });
 });
