@@ -6,10 +6,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ModalLoading from "@/Components/Dashboard/ModalLoading";
 import ModalSuccess from "@/Components/Dashboard/ModalSuccess";
+import ModalConfirmDelete from "@/Components/Dashboard/ModalConfirmDelete";
 
 const DashboardArtikel = (props) => {
     const [artikelData, setArtikelData] = useState([]);
     const [status, setStatus] = useState("");
+    const [data, setData] = useState({});
 
     // request artikel data
     const getArtikel = async () => {
@@ -47,6 +49,14 @@ const DashboardArtikel = (props) => {
             {status === "success" && (
                 <ModalSuccess item="Artikel" feature={"hapus"} />
             )}
+            {status === "delete" && (
+                <ModalConfirmDelete
+                    item={"artikel"}
+                    data={data}
+                    link={"artikel.destroy"}
+                    loading={setStatus}
+                />
+            )}
 
             <div className="py-5">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -68,6 +78,7 @@ const DashboardArtikel = (props) => {
                                     <ArtikelCard
                                         data={data}
                                         key={index}
+                                        setData={setData}
                                         loading={setStatus}
                                     />
                                 ))
