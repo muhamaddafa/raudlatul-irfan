@@ -50,8 +50,8 @@ const EditEkskul = (props) => {
                 }
             })
             .catch((error) => {
+                setMessage(error.response.data.errors.gambar_ekskul[0]);
                 setStatus("failed");
-                setMessage(error.response.data.error);
             });
     };
 
