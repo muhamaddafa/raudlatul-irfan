@@ -5,7 +5,7 @@ const ContainerLayout = ({ children, className = "" }) => {
         <>
             <div
                 className={
-                    `container-layout lg:px-[70px] lg:pt-[132px] pb-[32px] lg:pt-[120px] pt-[125px] px-8 md:px-12 ` +
+                    `container-layout lg:px-[70px] pb-[32px] lg:pt-[120px] pt-[125px] px-8 md:px-12 ` +
                     className
                 }
             >
