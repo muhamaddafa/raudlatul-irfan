@@ -32,9 +32,8 @@ const StoreGaleri = (props) => {
                 }
             })
             .catch((error) => {
-                console.error(error);
+                setMessage(error.response.data.errors.gambar_galeri[0]);
                 setStatus("failed");
-                setMessage(error.response.data.error);
             });
     };
 
