@@ -5,17 +5,23 @@ import ArtikelCard from "@/Components/Dashboard/Card/ArtikelCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ModalStatus from "@/Components/Dashboard/ModalStatus";
+import Paginator from "@/Components/Dashboard/Paginator";
 
 const DashboardArtikel = (props) => {
     const [artikelData, setArtikelData] = useState([]);
     const [status, setStatus] = useState("");
     const [data, setData] = useState({});
 
+    // pagination
+    const [meta, setMeta] = useState({});
+    const [page, setPage] = useState(1);
+
     // request artikel data
     const getArtikel = async () => {
         try {
-            const response = await axios.get(route("artikel.index"));
-            setArtikelData(response.data);
+            const response = await axios.get(route("artikel.index", { page }));
+            setArtikelData(response.data.data);
+            setMeta(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -23,7 +29,7 @@ const DashboardArtikel = (props) => {
     // get artikel data
     useEffect(() => {
         getArtikel();
-    }, []);
+    }, [page]);
 
     return (
         <AuthenticatedLayout
@@ -74,6 +80,7 @@ const DashboardArtikel = (props) => {
                                 ))
                             )}
                         </div>
+                        <Paginator meta={meta} setPage={setPage} />
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ const CardDeleteButton = ({ data, loading, setData }) => {
             className="flex items-center justify-center w-full gap-2 p-2 text-white duration-300 bg-red-700 rounded-md hover:scale-[110%] button"
         >
             <TrashIcon className="w-5 h-5" />
-            <p>Delete</p>
+            <p>Hapus</p>
         </button>
     );
 };

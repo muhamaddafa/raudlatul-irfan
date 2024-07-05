@@ -16,7 +16,7 @@ class ArtikelController extends Controller
     public function index()
     {
         try {
-            $artikels = Artikel::all();
+            $artikels = Artikel::orderBy('created_at', 'desc')->paginate(8);
             return response()->json($artikels);
         } catch (\Exception $e) {
             return response()->json([

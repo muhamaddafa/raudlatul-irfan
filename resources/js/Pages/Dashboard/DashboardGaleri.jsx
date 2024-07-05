@@ -4,17 +4,23 @@ import AddButton from "@/Components/Dashboard/AddButton";
 import GaleriCard from "@/Components/Dashboard/Card/GaleriCard";
 import { useEffect, useState } from "react";
 import ModalStatus from "@/Components/Dashboard/ModalStatus";
+import Paginator from "@/Components/Dashboard/Paginator";
 
 const DashboardGaleri = (props) => {
     const [galeriData, setGaleriData] = useState([]);
     const [status, setStatus] = useState("");
     const [data, setData] = useState({});
 
+    // pagination
+    const [meta, setMeta] = useState({});
+    const [page, setPage] = useState(1);
+
     // request galeri data
     const getGaleri = async () => {
         try {
-            const response = await axios.get(route("galeri.index"));
-            setGaleriData(response.data);
+            const response = await axios.get(route("galeri.index", { page }));
+            setGaleriData(response.data.data);
+            setMeta(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -22,7 +28,7 @@ const DashboardGaleri = (props) => {
     // get galeri data
     useEffect(() => {
         getGaleri();
-    }, []);
+    }, [page]);
 
     return (
         <AuthenticatedLayout
@@ -73,6 +79,7 @@ const DashboardGaleri = (props) => {
                                 ))
                             )}
                         </div>
+                        <Paginator meta={meta} setPage={setPage} />
                     </div>
                 </div>
             </div>

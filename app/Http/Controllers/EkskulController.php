@@ -15,7 +15,7 @@ class EkskulController extends Controller
     public function index()
     {
         try {
-            $ekskuls = Ekskul::all();
+            $ekskuls = Ekskul::orderBy('created_at', 'desc')->paginate(8);
             return response()->json($ekskuls);
         } catch (\Exception $e) {
             return response()->json([

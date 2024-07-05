@@ -5,17 +5,23 @@ import EkskulCard from "@/Components/Dashboard/Card/EkskulCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ModalStatus from "@/Components/Dashboard/ModalStatus";
+import Paginator from "@/Components/Dashboard/Paginator";
 
 const DashboardEkskul = (props) => {
     const [ekskulData, setEkskulData] = useState([]);
     const [status, setStatus] = useState("");
     const [data, setData] = useState({});
 
+    // pagination
+    const [meta, setMeta] = useState({});
+    const [page, setPage] = useState(1);
+
     // request ekskul data
     const getEkskul = async () => {
         try {
-            const response = await axios.get(route("ekskul.index"));
-            setEkskulData(response.data);
+            const response = await axios.get(route("ekskul.index", { page }));
+            setEkskulData(response.data.data);
+            setMeta(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -23,7 +29,7 @@ const DashboardEkskul = (props) => {
     // get ekskul data
     useEffect(() => {
         getEkskul();
-    }, []);
+    }, [page]);
 
     return (
         <AuthenticatedLayout
@@ -77,6 +83,7 @@ const DashboardEkskul = (props) => {
                                 ))
                             )}
                         </div>
+                        <Paginator meta={meta} setPage={setPage} />
                     </div>
                 </div>
             </div>
