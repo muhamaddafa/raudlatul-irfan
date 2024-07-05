@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Models\Artikel;
+use App\Models\Galeri;
+use App\Models\Ekskul;
 use Inertia\Inertia;
 
 /*
@@ -16,7 +20,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -25,9 +29,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', function () {
+    return Inertia::render('Home', ['artikel' => Artikel::latest()->take(3)->get()]);
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // Main Dashboard
@@ -44,6 +48,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard/tambah/artikel', function() {
         return Inertia::render('Dashboard/Store/StoreArtikel');
     })->name('form.artikel');
+    // Edit
+    Route::get('/dashboard/artikel/{link_artikel}/edit', function($link_artikel) {
+        return Inertia::render('Dashboard/Update/EditArtikel', [
+            'artikel' => Artikel::where('link_artikel', $link_artikel)->first()
+        ]);
+    })->name('edit.artikel');
 
     // Galeri Dashboard
     // index
@@ -56,9 +66,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('form.galeri');
 
     // Ekstrakurikuler Dashboard
-    Route::get('/dashboard/ekstrakurikuler', function() {
+    // index
+    Route::get('/dashboard/ekskul', function() {
         return Inertia::render('Dashboard/DashboardEkskul');
     })->name('dashboard.ekskul');
+    // store
+    Route::get('/dashboard/tambah/ekskul', function() {
+        return Inertia::render('Dashboard/Store/StoreEkskul');
+    })->name('form.ekskul');
+    // edit
+    Route::get('/dashboard/ekskul/{nama_ekskul}/edit', function($nama_ekskul) {
+        return Inertia::render('Dashboard/Update/EditEkskul', [
+            'ekskul' => Ekskul::where('nama_ekskul', $nama_ekskul)->first()
+        ]);
+    })->name('edit.ekskul');
 });
 
 Route::middleware('auth')->group(function () {
@@ -67,4 +88,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

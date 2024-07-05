@@ -29,7 +29,7 @@ Route::controller(ArtikelController::class)->group(function (){
     
     // Route::middleware('auth')->group(function (){
         Route::post('/artikel', 'store')->name('artikel.store');
-        Route::put('/artikel/{artikel}', 'update');
+        Route::put('/artikel/{artikel}', 'update')->name('artikel.update');
         Route::delete('/artikel/{artikel}', 'destroy')->name('artikel.destroy');
     // });
 });
@@ -46,12 +46,12 @@ Route::controller(GaleriController::class)->group(function (){
 });
 
 Route::controller(EkskulController::class)->group(function () {
-    Route::get('/ekskul', 'index');
+    Route::get('/ekskul', 'index')->name('ekskul.index');
     Route::get('/ekskul/{ekskul}', 'show');
 
     // Route::middleware('auth')->group(function () {
-        Route::post('/ekskul', 'store');
-        Route::put('/ekskul/{ekskul}', 'update');
-        Route::delete('/ekskul/{ekskul}', 'destroy');
+        Route::post('/ekskul', 'store')->name('ekskul.store');
+        Route::put('/ekskul/{ekskul}', 'update')->name('ekskul.update');
+        Route::delete('/ekskul/{ekskul}', 'destroy')->name('ekskul.destroy');
     // });
 });

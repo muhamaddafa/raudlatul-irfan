@@ -1,20 +1,11 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 
-const CardDeleteButton = ({ href, data, loading }) => {
+const CardDeleteButton = ({ data, loading, setData }) => {
     // delete function
     const deleteData = (e) => {
         e.preventDefault();
-        loading("loading");
-
-        const item = href.split(".")[0];
-        const parameter = { [item]: data };
-
-        const url = route(href, parameter);
-        axios.delete(url).then((response) => {
-            if (response.status === 200) {
-                loading("success");
-            }
-        });
+        loading("delete");
+        setData(data);
     };
 
     return (

@@ -66,7 +66,7 @@ const DashboardGaleri = (props) => {
                                 galeriData.map((data, index) => (
                                     <GaleriCard
                                         data={data}
-                                        index={index}
+                                        key={index}
                                         loading={setStatus}
                                     />
                                 ))
