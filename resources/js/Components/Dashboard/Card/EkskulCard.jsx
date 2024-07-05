@@ -1,6 +1,6 @@
 import { UserIcon, ClockIcon } from "@heroicons/react/24/outline";
-import CardEditButton from "./CardEditButton";
-import CardDeleteButton from "./CardDeleteButton";
+import CardEditButton from "../CardEditButton";
+import CardDeleteButton from "../CardDeleteButton";
 
 const EkskulCard = ({ data, loading, setData }) => {
     // format date and time

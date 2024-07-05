@@ -31,8 +31,6 @@ class StoreEkskulRequest extends FormRequest
     public function messages()
     {
         return [
-            'nama_ekskul.required' => 'Nama ekskul wajib diisi',
-            'pembuat.required' => 'Nama pembuat wajib diisi',
             'gambar_ekskul.required' => 'Gambar ekskul wajib diisi',
             'gambar_ekskul.image' => 'File harus berupa gambar',
             'gambar_ekskul.mimes' => 'Gambar harus berupa file dengan format jpeg, png, atau jpg',

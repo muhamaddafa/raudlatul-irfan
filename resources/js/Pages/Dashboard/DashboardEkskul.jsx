@@ -1,12 +1,10 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import AddButton from "@/Components/Dashboard/AddButton";
-import EkskulCard from "@/Components/Dashboard/EkskulCard";
+import EkskulCard from "@/Components/Dashboard/Card/EkskulCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ModalLoading from "@/Components/Dashboard/ModalLoading";
-import ModalSuccess from "@/Components/Dashboard/ModalSuccess";
-import ModalConfirmDelete from "@/Components/Dashboard/ModalConfirmDelete";
+import ModalStatus from "@/Components/Dashboard/ModalStatus";
 
 const DashboardEkskul = (props) => {
     const [ekskulData, setEkskulData] = useState([]);
@@ -39,24 +37,16 @@ const DashboardEkskul = (props) => {
             <Head title="Ekstrakurikuler Dashboard" />
 
             {/* Modal Status */}
-            {status === "loading" && (
-                <ModalLoading
-                    item="Ekskul"
-                    status={"Menghapus..."}
-                    message={"sedang dihapus dari database!"}
-                />
-            )}
-            {status === "success" && (
-                <ModalSuccess item="Ekskul" feature={"hapus"} />
-            )}
-            {status === "delete" && (
-                <ModalConfirmDelete
-                    item={"Ekskul"}
-                    data={data}
-                    link={"ekskul.destroy"}
-                    loading={setStatus}
-                />
-            )}
+            <ModalStatus
+                status={status}
+                item={"Ekskul"}
+                statusMessage={"Menghapus..."}
+                messageLoading={"sedang dihapus dari database!"}
+                feature={"hapus"}
+                data={data}
+                linkDelete={"ekskul.destroy"}
+                setStatus={setStatus}
+            />
 
             <div className="py-5">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">

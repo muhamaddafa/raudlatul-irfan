@@ -1,4 +1,4 @@
-import CardDeleteButton from "./CardDeleteButton";
+import CardDeleteButton from "../CardDeleteButton";
 
 const GaleriCard = ({ data, loading, setData }) => {
     return (

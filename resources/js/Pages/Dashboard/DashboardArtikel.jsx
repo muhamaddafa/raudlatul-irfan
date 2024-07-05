@@ -1,12 +1,10 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import AddButton from "@/Components/Dashboard/AddButton";
-import ArtikelCard from "@/Components/Dashboard/ArtikelCard";
+import ArtikelCard from "@/Components/Dashboard/Card/ArtikelCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ModalLoading from "@/Components/Dashboard/ModalLoading";
-import ModalSuccess from "@/Components/Dashboard/ModalSuccess";
-import ModalConfirmDelete from "@/Components/Dashboard/ModalConfirmDelete";
+import ModalStatus from "@/Components/Dashboard/ModalStatus";
 
 const DashboardArtikel = (props) => {
     const [artikelData, setArtikelData] = useState([]);
@@ -39,24 +37,16 @@ const DashboardArtikel = (props) => {
             <Head title="Artikel Dashboard" />
 
             {/* Modal Status */}
-            {status === "loading" && (
-                <ModalLoading
-                    item="Artikel"
-                    status={"Menghapus..."}
-                    message={"sedang dihapus dari database!"}
-                />
-            )}
-            {status === "success" && (
-                <ModalSuccess item="Artikel" feature={"hapus"} />
-            )}
-            {status === "delete" && (
-                <ModalConfirmDelete
-                    item={"artikel"}
-                    data={data}
-                    link={"artikel.destroy"}
-                    loading={setStatus}
-                />
-            )}
+            <ModalStatus
+                status={status}
+                item={"Artikel"}
+                statusMessage={"Menghapus..."}
+                messageLoading={"sedang dihapus dari database!"}
+                feature={"hapus"}
+                data={data}
+                linkDelete={"artikel.destroy"}
+                setStatus={setStatus}
+            />
 
             <div className="py-5">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">

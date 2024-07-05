@@ -31,11 +31,6 @@ class UpdateEkskulRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'nama_ekskul.required' => 'Nama ekskul wajib diisi.',
-            'nama_ekskul.string' => 'Nama ekskul harus berupa teks.',
-            'nama_ekskul.max' => 'Nama ekskul tidak boleh lebih dari 64 karakter.',
-            'pembuat.required' => 'Pembuat wajib diisi.',
-            'pembuat.string' => 'Pembuat harus berupa teks.',
             'gambar_ekskul.image' => 'Gambar ekskul harus berupa file gambar.',
             'gambar_ekskul.mimes' => 'Gambar ekskul harus berformat jpeg, png, atau jpg.',
             'gambar_ekskul.max' => 'Ukuran gambar ekskul tidak boleh lebih dari 2MB.',
