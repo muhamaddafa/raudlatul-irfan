@@ -2,7 +2,7 @@ import { UserIcon, ClockIcon } from "@heroicons/react/24/outline";
 import CardEditButton from "./CardEditButton";
 import CardDeleteButton from "./CardDeleteButton";
 
-const EkskulCard = ({ data, loading }) => {
+const EkskulCard = ({ data, loading, setData }) => {
     // format date and time
     const dateOptions = {
         year: "numeric",
@@ -53,9 +53,9 @@ const EkskulCard = ({ data, loading }) => {
                 <div className="flex gap-3 pt-2 edit-delete">
                     <CardEditButton data={data.nama_ekskul} item={"ekskul"} />
                     <CardDeleteButton
-                        href={"ekskul.destroy"}
                         data={data}
                         loading={loading}
+                        setData={setData}
                     />
                 </div>
             </div>

@@ -6,10 +6,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ModalLoading from "@/Components/Dashboard/ModalLoading";
 import ModalSuccess from "@/Components/Dashboard/ModalSuccess";
+import ModalConfirmDelete from "@/Components/Dashboard/ModalConfirmDelete";
 
 const DashboardEkskul = (props) => {
     const [ekskulData, setEkskulData] = useState([]);
     const [status, setStatus] = useState("");
+    const [data, setData] = useState({});
 
     // request ekskul data
     const getEkskul = async () => {
@@ -47,6 +49,14 @@ const DashboardEkskul = (props) => {
             {status === "success" && (
                 <ModalSuccess item="Ekskul" feature={"hapus"} />
             )}
+            {status === "delete" && (
+                <ModalConfirmDelete
+                    item={"Ekskul"}
+                    data={data}
+                    link={"ekskul.destroy"}
+                    loading={setStatus}
+                />
+            )}
 
             <div className="py-5">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -71,6 +81,7 @@ const DashboardEkskul = (props) => {
                                     <EkskulCard
                                         data={data}
                                         key={index}
+                                        setData={setData}
                                         loading={setStatus}
                                     />
                                 ))
