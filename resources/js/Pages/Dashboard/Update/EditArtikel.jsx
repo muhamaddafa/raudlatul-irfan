@@ -54,8 +54,8 @@ const EditArtikel = (props) => {
                 }
             })
             .catch((error) => {
+                setMessage(error.response.data.errors.gambar_artikel[0]);
                 setStatus("failed");
-                setMessage(error.response.data.error);
             });
     };
 

@@ -30,10 +30,12 @@ class UpdateArtikelRequest extends FormRequest
         ];
     }
 
-     public function messages()
+     public function messages(): array
     {
         return [
-            
+            'gambar_artikel.image' => 'Gambar artikel harus berupa file gambar.',
+            'gambar_artikel.mimes' => 'Gambar artikel harus berformat jpeg, png, atau jpg.',
+            'gambar_artikel.max' => 'Ukuran gambar artikel tidak boleh lebih dari 2MB.',
         ];
     }
 }
