@@ -5,10 +5,12 @@ import GaleriCard from "@/Components/Dashboard/GaleriCard";
 import { useEffect, useState } from "react";
 import ModalLoading from "@/Components/Dashboard/ModalLoading";
 import ModalSuccess from "@/Components/Dashboard/ModalSuccess";
+import ModalConfirmDelete from "@/Components/Dashboard/ModalConfirmDelete";
 
 const DashboardGaleri = (props) => {
     const [galeriData, setGaleriData] = useState([]);
     const [status, setStatus] = useState("");
+    const [data, setData] = useState({});
 
     // request galeri data
     const getGaleri = async () => {
@@ -46,6 +48,14 @@ const DashboardGaleri = (props) => {
             {status === "success" && (
                 <ModalSuccess item="Galeri" feature={"hapus"} />
             )}
+            {status === "delete" && (
+                <ModalConfirmDelete
+                    item={"Galeri"}
+                    data={data}
+                    link={"galeri.destroy"}
+                    loading={setStatus}
+                />
+            )}
 
             <div className="py-5">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -67,6 +77,7 @@ const DashboardGaleri = (props) => {
                                     <GaleriCard
                                         data={data}
                                         key={index}
+                                        setData={setData}
                                         loading={setStatus}
                                     />
                                 ))
