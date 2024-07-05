@@ -1,11 +1,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import AddButton from "@/Components/Dashboard/AddButton";
-import GaleriCard from "@/Components/Dashboard/GaleriCard";
+import GaleriCard from "@/Components/Dashboard/Card/GaleriCard";
 import { useEffect, useState } from "react";
-import ModalLoading from "@/Components/Dashboard/ModalLoading";
-import ModalSuccess from "@/Components/Dashboard/ModalSuccess";
-import ModalConfirmDelete from "@/Components/Dashboard/ModalConfirmDelete";
+import ModalStatus from "@/Components/Dashboard/ModalStatus";
 
 const DashboardGaleri = (props) => {
     const [galeriData, setGaleriData] = useState([]);
@@ -38,24 +36,16 @@ const DashboardGaleri = (props) => {
             <Head title="Galeri Dashboard" />
 
             {/* Modal Status */}
-            {status === "loading" && (
-                <ModalLoading
-                    item="Galeri"
-                    status={"Menghapus..."}
-                    message={"sedang dihapus dari database!"}
-                />
-            )}
-            {status === "success" && (
-                <ModalSuccess item="Galeri" feature={"hapus"} />
-            )}
-            {status === "delete" && (
-                <ModalConfirmDelete
-                    item={"Galeri"}
-                    data={data}
-                    link={"galeri.destroy"}
-                    loading={setStatus}
-                />
-            )}
+            <ModalStatus
+                status={status}
+                item={"Galeri"}
+                statusMessage={"Menghapus..."}
+                messageLoading={"sedang dihapus dari database!"}
+                feature={"hapus"}
+                data={data}
+                linkDelete={"galeri.destroy"}
+                setStatus={setStatus}
+            />
 
             <div className="py-5">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">

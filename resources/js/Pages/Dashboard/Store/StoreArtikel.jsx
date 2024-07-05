@@ -1,6 +1,4 @@
-import ModalFailed from "@/Components/Dashboard/ModalFailed";
-import ModalLoading from "@/Components/Dashboard/ModalLoading";
-import ModalSuccess from "@/Components/Dashboard/ModalSuccess";
+import ModalStatus from "@/Components/Dashboard/ModalStatus";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import axios from "axios";
@@ -66,19 +64,14 @@ const StoreArtikel = (props) => {
             <Head title="Tambah Artikel" />
 
             {/* Modal Status */}
-            {status === "loading" && (
-                <ModalLoading
-                    item="Artikel"
-                    status={"Mengunggah..."}
-                    message={"sedang ditambahkan ke database!"}
-                />
-            )}
-            {status === "success" && (
-                <ModalSuccess item="Artikel" feature={"tambah"} />
-            )}
-            {status === "failed" && (
-                <ModalFailed item="Artikel" message={message} />
-            )}
+            <ModalStatus
+                status={status}
+                item={"Artikel"}
+                statusMessage={"Mengunggah..."}
+                messageLoading={"sedang ditambahkan ke database!"}
+                messageError={message}
+                feature={"tambah"}
+            />
 
             <div className="container relative w-3/5 px-4 mx-auto mt-5 max-w-7xl sm:px-6 lg:px-8">
                 <form onSubmit={store} className="flex flex-col gap-3">

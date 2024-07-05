@@ -1,6 +1,4 @@
-import ModalFailed from "@/Components/Dashboard/ModalFailed";
-import ModalLoading from "@/Components/Dashboard/ModalLoading";
-import ModalSuccess from "@/Components/Dashboard/ModalSuccess";
+import ModalStatus from "@/Components/Dashboard/ModalStatus";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import axios from "axios";
@@ -80,19 +78,14 @@ const EditEkskul = (props) => {
             <Head title="Edit Ekskul" />
 
             {/* Modal Status */}
-            {status === "loading" && (
-                <ModalLoading
-                    item="Ekskul"
-                    status={"Mengubah..."}
-                    message={"sedang diubah"}
-                />
-            )}
-            {status === "success" && (
-                <ModalSuccess item="Ekskul" feature={"edit"} />
-            )}
-            {status === "failed" && (
-                <ModalFailed item="Ekskul" message={message} />
-            )}
+            <ModalStatus
+                status={status}
+                item={"Ekskul"}
+                statusMessage={"Mengubah..."}
+                messageLoading={"sedang diubah"}
+                messageError={message}
+                feature={"edit"}
+            />
 
             <div className="container relative w-3/5 px-4 mx-auto mt-5 max-w-7xl sm:px-6 lg:px-8">
                 <form onSubmit={edit} className="flex flex-col gap-3">
