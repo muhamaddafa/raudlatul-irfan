@@ -12,19 +12,23 @@ const Paginator = ({ meta, setPage }) => {
     }, [meta]);
 
     const getPageNumbers = () => {
-        const pages = [];
-        const delta = 2;
-        let start = Math.max(1, currentPage - delta);
-        let end = Math.min(lastPage, currentPage + delta);
+        if (meta.total > 0) {
+            const pages = [];
+            const delta = 2;
+            let start = Math.max(1, currentPage - delta);
+            let end = Math.min(lastPage, currentPage + delta);
 
-        if (currentPage <= delta) end = Math.min(lastPage, delta * 2 + 1);
-        if (currentPage + delta >= lastPage)
-            start = Math.max(1, lastPage - delta * 2);
+            if (currentPage <= delta) end = Math.min(lastPage, delta * 2 + 1);
+            if (currentPage + delta >= lastPage)
+                start = Math.max(1, lastPage - delta * 2);
 
-        for (let i = start; i <= end; i++) pages.push(i);
-        if (start > 1) pages.unshift("...");
-        if (end < lastPage) pages.push("...");
-        return pages;
+            for (let i = start; i <= end; i++) pages.push(i);
+            if (start > 1) pages.unshift("...");
+            if (end < lastPage) pages.push("...");
+            return pages;
+        } else {
+            return [];
+        }
     };
 
     const pages = getPageNumbers();
