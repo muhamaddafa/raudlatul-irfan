@@ -18,12 +18,16 @@ const ArtikelCard = ({ data, setData, loading }) => {
         hour12: false,
     };
 
+    // img src
+    const src = import.meta.env.VITE_ARTIKEL_IMAGE_URL;
+
     return (
         <div className="col-span-3 border-[#00923F] border-opacity-35 border hover:border-2 hover:border-opacity-100 hover:-translate-y-2 duration-300 rounded-lg shadow-xl artikel-card">
             <div className="flex flex-col gap-3 p-4 card-content">
                 <img
-                    src={`../storage/artikel/${data.gambar_artikel}`}
+                    src={src + data.gambar_artikel}
                     alt="artikel-image"
+                    loading="lazy"
                     className="object-cover object-center w-full h-48 rounded-md"
                 />
                 <div className="kategori-artikel">

@@ -17,12 +17,17 @@ const EkskulCard = ({ data, loading, setData }) => {
         timeZone: "Asia/Jakarta",
         hour12: false,
     };
+
+    // img src
+    const src = import.meta.env.VITE_EKSKUL_IMAGE_URL;
+
     return (
         <div className="col-span-3 border-[#00923F] border-opacity-35 border hover:border-2 hover:border-opacity-100 hover:-translate-y-2 duration-300 rounded-lg shadow-xl artikel-card">
             <div className="flex flex-col gap-3 p-4 card-content">
                 <img
-                    src={`../storage/ekskul/${data.gambar_ekskul}`}
+                    src={src + data.gambar_ekskul}
                     alt="artikel-image"
+                    loading="lazy"
                     className="object-cover w-full h-48 rounded-md"
                 />
                 <div className="judul-artikel">
