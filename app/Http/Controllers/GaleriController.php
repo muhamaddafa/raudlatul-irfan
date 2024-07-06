@@ -16,7 +16,7 @@ class GaleriController extends Controller
     public function index()
     {
         try {
-            $galeris = Galeri::all();
+            $galeris = Galeri::orderBy('created_at', 'desc')->paginate(8);
             return response()->json($galeris);
         } catch (\Exception $e) {
             return response()->json([
