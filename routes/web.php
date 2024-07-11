@@ -41,6 +41,10 @@ Route::get('/berita', function () {
     return Inertia::render('Berita', ['artikel' => Artikel::all()]);
 });
 
+Route::get('/galeri', function () {
+    return Inertia::render('Galeri', ['galeri' => Galeri::all()]);
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     // Main Dashboard
     Route::get('/dashboard', function () {
