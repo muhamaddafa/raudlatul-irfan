@@ -1,14 +1,41 @@
+import React, { useEffect, useState } from "react";
 import { Link } from "@inertiajs/react";
 import PageLayout from "@/Layouts/PageLayout";
 import ContainerLayout from "@/Layouts/ContainerLayout";
-import React from "react";
 import Button from "@/Components/Button";
 import Footer from "@/Components/Footer";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { ChevronRightIcon } from "@heroicons/react/24/solid";
 
 const Home = (props) => {
+    // artikel data
+    const artikel = props.artikel;
+
+    // galeri data
+    const [galeri, setGaleri] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // request galeri data
+    const getGaleri = async (page = 1) => {
+        try {
+            const response = await axios.get(`/api/galeri?page=${page}`);
+            setGaleri(response.data.data);
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // get galeri data
+    useEffect(() => {
+        getGaleri();
+    }, []);
+
     const settings = {
         dots: true,
         infinite: true,
@@ -28,20 +55,18 @@ const Home = (props) => {
         ],
     };
 
-    const artikel = props.artikel;
-
     return (
         <>
             <PageLayout title={"Home"} currentPath={"home"}>
                 <ContainerLayout className="flex-grow">
-                    <div className="relative w-full h-auto">
+                    <section className="relative w-full h-auto">
                         <div className="absolute inset-0 bg-black opacity-70 rounded-3xl"></div>
                         <img
                             src={`/storage/img/demo(1).jpg`}
                             alt="HOME"
                             className="absolute inset-0 w-full h-full object-cover rounded-3xl -z-10"
                         />
-                        <div className="relative flex flex-col lg:gap-14 gap-8 p-8 lg:mr-82">
+                        <div className="relative flex flex-col lg:gap-10 gap-6 p-10 lg:mr-82">
                             <h1 className="lg:text-4xl text-lg font-extrabold text-[#00923F] whitespace-nowrap ">
                                 MAS Raudlatul Irfan
                             </h1>
@@ -51,15 +76,18 @@ const Home = (props) => {
                                 Consectetur sed Pellentesque a cum mattis fames
                             </p>
                             <div>
-                                <Link href="/ppdb">
+                                <a
+                                    href="https://linktr.ee/masraudlatulirfan.tng"
+                                    target="_blank"
+                                >
                                     <Button className="px-4 py-2 lg:text-2xl text-base font-extrabold whitespace-nowrap">
                                         Daftar Sekarang
                                     </Button>
-                                </Link>
+                                </a>
                             </div>
                         </div>
-                    </div>
-                    <div className="Sambutan">
+                    </section>
+                    <section className="Sambutan">
                         <div className="my-8 flex flex-row lg:gap-8 gap-4 items-center">
                             <h2
                                 className="lg:text-2xl text-xl font-extrabold text-[#00923F] whitespace-nowrap
@@ -69,7 +97,7 @@ const Home = (props) => {
                             </h2>
                             <p className="bg-[#FEC301] h-1 flex-grow"></p>
                         </div>
-                        <div className="mt-4 flex lg:flex-row flex-col lg:gap-32 gap-14 justify-center">
+                        <div className="mt-4 flex lg:flex-row flex-col lg:gap-24 gap-14 justify-center">
                             <div className="w-full flex justify-center">
                                 <div className="relative">
                                     <img
@@ -84,7 +112,7 @@ const Home = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-col lg:text-xl text-base font-extrabold gap-6">
+                            <div className="flex flex-col lg:text-xl text-base font-extrabold gap-8">
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur.
                                     Tempor nisi fringilla arcu quam venenatis
@@ -108,8 +136,8 @@ const Home = (props) => {
                                 </p>
                             </div>
                         </div>
-                    </div>
-                    <div className="Artikel">
+                    </section>
+                    <section className="Artikel">
                         <div className="mt-8 mb-4 flex flex-row gap-8 items-center">
                             <p className="bg-[#FEC301] h-1 flex-grow"></p>
                             <h2
@@ -124,24 +152,10 @@ const Home = (props) => {
                             className="flex items-center gap-2 text-[#00923F] lg:text-xl text-lg font-extrabold hover:text-green-500 hover:border-gray-300 focus:text-gray-700 focus:border-gray-300"
                         >
                             Lihat Semua Artikel
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="1em"
-                                height="1em"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="m10 17l5-5m0 0l-5-5"
-                                ></path>
-                            </svg>
+                            <ChevronRightIcon className="size-4" />
                         </Link>
-                        <div className="hidden lg:block md:block">
-                            {/* Tampilkan grid di layar besar */}
+                        <div className="hidden md:block">
+                            {/* desktop and tablet view */}
                             <div className="grid lg:grid-cols-3 gap-8 lg:mt-8 mt-6">
                                 {artikel.map((artikel) => (
                                     <div
@@ -179,12 +193,13 @@ const Home = (props) => {
                                 ))}
                             </div>
                         </div>
+                        {/* mobile view */}
                         <div className="block md:hidden">
                             <Slider {...settings}>
                                 {artikel.map((artikel) => (
                                     <div
                                         key={artikel.id}
-                                        className="flex flex-col rounded-lg bg-white mt-6 border border-2 border-green-700"
+                                        className="flex flex-col rounded-lg bg-white mt-6 border-2 border-green-700"
                                     >
                                         <img
                                             src={`/storage/img/${artikel.gambar_artikel}`}
@@ -217,8 +232,8 @@ const Home = (props) => {
                                 ))}
                             </Slider>
                         </div>
-                    </div>
-                    <div className="Galeri">
+                    </section>
+                    <section className="Galeri">
                         <div className="mt-10 mb-4 flex flex-row gap-8 items-center">
                             <h2
                                 className="lg:text-2xl text-xl font-extrabold text-[#00923F] whitespace-nowrap
@@ -233,78 +248,34 @@ const Home = (props) => {
                             className="text-[#00923F] lg:text-xl text-lg font-extrabold flex justify-end items-center gap-2 hover:text-green-500 hover:border-gray-300 focus:text-gray-700 focus:border-gray-300"
                         >
                             Lihat Semua Galeri
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="1em"
-                                height="1em"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="m10 17l5-5m0 0l-5-5"
-                                ></path>
-                            </svg>
+                            <ChevronRightIcon className="size-4" />
                         </Link>
-                        <div className="mt-6 grid md:grid-cols-8 md:gap-8 gap-4 lg:h-[460px]">
-                            <div className="flex flex-col lg:gap-8 gap-4 md:col-span-3">
-                                <div className="h-[210px]">
-                                    <img
-                                        src={`/storage/img/demo(1).jpg`}
-                                        alt="GALERI"
-                                        className="w-full h-full object-cover rounded-lg"
-                                    />
-                                </div>
-                                <div className="flex lg:gap-8 gap-4 h-[210px]">
-                                    <div className="w-1/2">
-                                        <img
-                                            src={`/storage/img/demo(1).jpg`}
-                                            alt="GALERI"
-                                            className="object-cover rounded-lg w-full h-full"
-                                        />
-                                    </div>
-                                    <div className="w-1/2">
-                                        <img
-                                            src={`/storage/img/demo(1).jpg`}
-                                            alt="GALERI"
-                                            className="object-cover rounded-lg w-full h-full"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex flex-col lg:gap-8 gap-4 md:col-span-2">
-                                <img
-                                    src={`/storage/img/demo(1).jpg`}
-                                    alt="GALERI"
-                                    className="object-cover rounded-lg w-full h-[210px]"
-                                />
-                                <img
-                                    src={`/storage/img/demo(1).jpg`}
-                                    alt="GALERI"
-                                    className="object-cover rounded-lg w-full h-[210px] hidden md:block"
-                                />
-                            </div>
-                            <div className="md:col-span-1 block md:hidden lg:block">
-                                <img
-                                    src={`/storage/img/demo(1).jpg`}
-                                    alt="GALERI"
-                                    className="object-cover rounded-lg w-full h-[452px]"
-                                />
-                            </div>
-                            <div className="lg:col-span-2 md:col-span-3 hidden md:block">
-                                <img
-                                    src={`/storage/img/demo(1).jpg`}
-                                    alt="GALERI"
-                                    className="object-cover rounded-lg w-full lg:h-[452px] md:h-[438px]"
-                                />
-                            </div>
+                        <div className="mt-2">
+                            <ResponsiveMasonry
+                                columnsCountBreakPoints={{
+                                    350: 2,
+                                    750: 3,
+                                    900: 4,
+                                }}
+                            >
+                                <Masonry>
+                                    {galeri.map((galeri) => (
+                                        <div
+                                            key={galeri.id}
+                                            className="m-4 shadow-xl rounded-xl"
+                                        >
+                                            <img
+                                                src={`/storage/img/${galeri.gambar_galeri}`}
+                                                className="w-full h-auto rounded-xl"
+                                            />
+                                        </div>
+                                    ))}
+                                </Masonry>
+                            </ResponsiveMasonry>
                         </div>
-                    </div>
+                    </section>
                 </ContainerLayout>
-                <Footer></Footer>
+                <Footer />
             </PageLayout>
         </>
     );

@@ -30,7 +30,7 @@ Route::get('/welcome', function () {
 });
 
 Route::get('/', function () {
-    return Inertia::render('Home', ['artikel' => Artikel::latest()->take(3)->get()]);
+    return Inertia::render('Home', ['artikel' => Artikel::latest()->take(3)->get(), 'galeri' => Galeri::all()]);
 });
 
 Route::get('/info', function () {

@@ -6,7 +6,7 @@ export default function MobilePageLink({ active, children, href, ...props }) {
             {...props}
             className={
                 active
-                    ? "text-[#00932F] font-bold md:text-4xl text-2xl"
+                    ? "text-[#00932F] font-bold md:text-4xl text-2xl text-end"
                     : "text-black font-light md:text-2xl"
             }
             href={href}
