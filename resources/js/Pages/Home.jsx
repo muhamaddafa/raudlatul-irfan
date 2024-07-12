@@ -163,7 +163,7 @@ const Home = (props) => {
                                         className="flex lg:flex-col rounded-lg bg-white shadow-xl border-gray-500"
                                     >
                                         <img
-                                            src={`/storage/img/${artikel.gambar_artikel}`}
+                                            src={`/storage/artikel/${artikel.gambar_artikel}`}
                                             alt={artikel.judul_artikel}
                                             className="w-full h-[240px] object-cover rounded-t-lg"
                                         />
@@ -202,7 +202,7 @@ const Home = (props) => {
                                         className="flex flex-col rounded-lg bg-white mt-6 border-2 border-green-700"
                                     >
                                         <img
-                                            src={`/storage/img/${artikel.gambar_artikel}`}
+                                            src={`/storage/artikel/${artikel.gambar_artikel}`}
                                             alt={artikel.judul_artikel}
                                             className="h-[220px] w-full object-cover rounded-t-lg"
                                         />
@@ -265,7 +265,7 @@ const Home = (props) => {
                                             className="m-4 shadow-xl rounded-xl"
                                         >
                                             <img
-                                                src={`/storage/img/${galeri.gambar_galeri}`}
+                                                src={`/storage/galeri/${galeri.gambar_galeri}`}
                                                 className="w-full h-auto rounded-xl"
                                             />
                                         </div>
