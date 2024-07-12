@@ -37,6 +37,10 @@ Route::get('/info', function () {
     return Inertia::render('Info', ['ekskul' => Ekskul::all()]);
 });
 
+Route::get('/berita', function () {
+    return Inertia::render('Berita', ['artikel' => Artikel::all()]);
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     // Main Dashboard
     Route::get('/dashboard', function () {
