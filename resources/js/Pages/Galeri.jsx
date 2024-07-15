@@ -74,7 +74,7 @@ const Galeri = () => {
                                         className="m-4 shadow-xl rounded-xl"
                                     >
                                         <img
-                                            src={`/storage/img/${item.gambar_galeri}`}
+                                            src={`/storage/galeri/${item.gambar_galeri}`}
                                             alt=""
                                             className="w-full h-auto rounded-xl"
                                         />
