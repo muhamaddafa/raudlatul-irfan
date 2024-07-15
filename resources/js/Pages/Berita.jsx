@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import ContainerLayout from "@/Layouts/ContainerLayout";
 import PageLayout from "@/Layouts/PageLayout";
 import Button from "@/Components/Button";
@@ -9,20 +10,35 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Berita = (props) => {
-    const { artikel } = props;
-
+    const [artikel, setArtikel] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 3;
-    const totalPages = Math.ceil(artikel.length / itemsPerPage);
+    const [totalPages, setTotalPages] = useState(1);
 
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
+    // request artikel data
+    const getArtikel = async (page = 1) => {
+        try {
+            const response = await axios.get(`/api/artikel?page=${page}`);
+            setArtikel(response.data.data);
+            setTotalPages(response.data.last_page); // Update total pages from API response
+            setCurrentPage(page); // Update current page
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const slicedArtikel = artikel.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    // get artikel data
+    useEffect(() => {
+        getArtikel();
+    }, []);
+
+    // pagination
+    const onPageChange = (page) => {
+        getArtikel(page);
+    };
 
     // Slider settings
     const settings = {
@@ -33,20 +49,13 @@ const Berita = (props) => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
-        appendDots: (dots) => (
-            <ul style={{ margin: "0px" }}>
-                {[...Array(5)].map((_, index) => (
-                    <li key={index}>{dots[index]}</li>
-                ))}
-            </ul>
-        ),
         responsive: [
             {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                    dots: false, //  dots on mobile
+                    dots: true, // dots on mobile devices
                     infinite: true,
                 },
             },
@@ -81,16 +90,16 @@ const Berita = (props) => {
                             Artikel Terbaru
                         </h2>
                     </div>
+                    {/* desktop and tablet view*/}
                     <div className="hidden lg:block md:block">
-                        {/* Tampilkan grid di layar besar */}
                         <div className="grid lg:grid-cols-3 gap-8 lg:mt-8 mt-6">
-                            {slicedArtikel.map((artikel) => (
+                            {artikel.map((artikel) => (
                                 <div
                                     key={artikel.id}
                                     className="flex lg:flex-col rounded-lg bg-white shadow-xl border-gray-500"
                                 >
                                     <img
-                                        src={`/storage/img/${artikel.gambar_artikel}`}
+                                        src={`/storage/artikel/${artikel.gambar_artikel}`}
                                         alt={artikel.judul_artikel}
                                         className="w-full h-[240px] object-cover rounded-t-lg"
                                     />
@@ -120,6 +129,7 @@ const Berita = (props) => {
                             ))}
                         </div>
                     </div>
+                    {/* mobile view */}
                     <div className="block md:hidden">
                         <Slider {...settings}>
                             {artikel.map((artikel) => (
@@ -128,7 +138,7 @@ const Berita = (props) => {
                                     className="flex flex-col rounded-lg bg-white border-2 border-green-700"
                                 >
                                     <img
-                                        src={`/storage/img/${artikel.gambar_artikel}`}
+                                        src={`/storage/artikel/${artikel.gambar_artikel}`}
                                         alt={artikel.judul_artikel}
                                         className="h-[220px] w-full object-cover rounded-t-lg"
                                     />
@@ -158,12 +168,12 @@ const Berita = (props) => {
                             ))}
                         </Slider>
                     </div>
-                    <div className="hidden md:block">
-                        {/* Pagination controls */}
+                    {/* Pagination */}
+                    <div className="flex justify-center">
                         <Pagination
                             currentPage={currentPage}
                             totalPages={totalPages}
-                            onPageChange={handlePageChange}
+                            onPageChange={onPageChange}
                         />
                     </div>
                 </ContainerLayout>
