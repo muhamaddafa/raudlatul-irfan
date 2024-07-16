@@ -32,7 +32,7 @@ const ModalStatus = ({
                         return (
                             messageError && (
                                 <ModalFailed
-                                    item="Artikel"
+                                    item={item}
                                     message={messageError}
                                 />
                             )

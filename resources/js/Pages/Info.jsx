@@ -33,7 +33,7 @@ const Info = (props) => {
             <PageLayout title={"Info"} currentPath={"info"}>
                 <ContainerLayout>
                     <section className="Sejarah">
-                        <div className="mb-8 flex flex-row lg:gap-8 gap-4 items-center">
+                        <div className="flex flex-row items-center gap-4 mb-8 lg:gap-8">
                             <h2
                                 className="lg:text-3xl md:text-2xl text-xl font-extrabold text-[#00923F] whitespace-nowrap
                         "
@@ -42,7 +42,7 @@ const Info = (props) => {
                             </h2>
                             <p className="bg-[#FEC301] h-1 flex-grow"></p>
                         </div>
-                        <div className="grid md:grid-cols-5 lg:gap-10 gap-8">
+                        <div className="grid gap-8 md:grid-cols-5 lg:gap-10">
                             <div className="w-full md:col-span-2">
                                 <img
                                     className="w-full md:h-[340px] h-[150px] object-cover rounded-lg mx-auto"
@@ -50,7 +50,7 @@ const Info = (props) => {
                                     alt="DEMO"
                                 />
                             </div>
-                            <div className="flex flex-col md:justify-between gap-4 md:col-span-3 lg:text-xl text-base font-extrabold">
+                            <div className="flex flex-col gap-4 text-base font-extrabold md:justify-between md:col-span-3 lg:text-xl">
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur.
                                     Tempor nisi fringilla arcu quam venenatis
@@ -76,7 +76,7 @@ const Info = (props) => {
                         </div>
                     </section>
                     <section className="visi-misi">
-                        <div className="my-8 flex flex-row lg:gap-8 gap-4 items-center">
+                        <div className="flex flex-row items-center gap-4 my-8 lg:gap-8">
                             <h2
                                 className="lg:text-3xl text-2xl font-extrabold text-[#00923F] whitespace-nowrap
                         "
@@ -92,13 +92,13 @@ const Info = (props) => {
                             </h2>
                             <p className="bg-[#FEC301] h-1 flex-grow"></p>
                         </div>
-                        <div className="grid md:grid-cols-5 gap-8">
+                        <div className="grid gap-8 md:grid-cols-5">
                             <div className="flex flex-col gap-4 md:col-span-2">
                                 <div className="md:h-[195px] h-[150px] ">
                                     <img
                                         src={`/storage/img/demo(1).jpg`}
                                         alt="GALERI"
-                                        className="w-full h-full object-cover rounded-lg"
+                                        className="object-cover w-full h-full rounded-lg"
                                     />
                                 </div>
                                 <div className="flex gap-4 md:h-[195px]">
@@ -106,19 +106,19 @@ const Info = (props) => {
                                         <img
                                             src={`/storage/img/demo(1).jpg`}
                                             alt="GALERI"
-                                            className="object-cover rounded-lg w-full h-full"
+                                            className="object-cover w-full h-full rounded-lg"
                                         />
                                     </div>
                                     <div className="md:w-1/2">
                                         <img
                                             src={`/storage/img/demo(1).jpg`}
                                             alt="GALERI"
-                                            className="object-cover rounded-lg w-full h-full"
+                                            className="object-cover w-full h-full rounded-lg"
                                         />
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-col lg:gap-0 md:justify-between gap-4 md:col-span-3 lg:text-xl text-base font-extrabold">
+                            <div className="flex flex-col gap-4 text-base font-extrabold lg:gap-0 md:justify-between md:col-span-3 lg:text-xl">
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur.
                                     Tempor nisi fringilla arcu quam venenatis
@@ -148,7 +148,7 @@ const Info = (props) => {
                         </div>
                     </section>
                     <section className="Ekskul">
-                        <div className="my-8 flex flex-row lg:gap-8 gap-4 items-center">
+                        <div className="flex flex-row items-center gap-4 my-8 lg:gap-8">
                             <h2 className="lg:text-3xl text-2xl font-extrabold text-[#00923F] whitespace-nowrap">
                                 Ekstrakurikuler
                             </h2>
@@ -166,16 +166,16 @@ const Info = (props) => {
                                 {ekskul.map((ekskul) => (
                                     <div
                                         key={ekskul.id}
-                                        className="md:m-4 m-2 shadow-xl rounded-xl"
+                                        className="m-2 shadow-xl md:m-4 rounded-xl"
                                     >
                                         <div className="relative group">
-                                            <div className="absolute inset-0 bg-black opacity-60 rounded-lg group-hover:opacity-0 transition-opacity duration-300"></div>
+                                            <div className="absolute inset-0 transition-opacity duration-300 bg-black rounded-lg opacity-60 group-hover:opacity-0"></div>
                                             <img
-                                                src={`/storage/img/${ekskul.gambar_ekskul}`}
+                                                src={`/storage/ekskul/${ekskul.gambar_ekskul}`}
                                                 alt={ekskul.nama_ekskul}
                                                 className="w-full h-auto rounded-lg"
                                             />
-                                            <div className="absolute inset-0 flex items-end p-4 justify-center text-white md:text-2xl text-base font-extrabold group-hover:opacity-0 transition-opacity duration-300">
+                                            <div className="absolute inset-0 flex items-end justify-center p-4 text-base font-extrabold text-white transition-opacity duration-300 md:text-2xl group-hover:opacity-0">
                                                 <p>{ekskul.nama_ekskul}</p>
                                             </div>
                                         </div>
@@ -185,29 +185,29 @@ const Info = (props) => {
                         </ResponsiveMasonry>
                     </section>
                     <section className="Lokasi">
-                        <div className="mt-4 mb-8 flex flex-row lg:gap-8 gap-4 items-center">
+                        <div className="flex flex-row items-center gap-4 mt-4 mb-8 lg:gap-8">
                             <p className="bg-[#FEC301] h-1 flex-grow"></p>
                             <h2 className="lg:text-3xl text-2xl font-extrabold text-[#00923F] whitespace-nowrap">
                                 Lokasi
                             </h2>
                         </div>
-                        <div className="grid lg:grid-cols-3 gap-8">
+                        <div className="grid gap-8 lg:grid-cols-3">
                             <div>
                                 <div className="flex flex-col lg:col-span-1 bg-[#F8F8F8] shadow-2xl p-8 rounded-lg border-2">
                                     <div className="flex flex-col items-center font-extrabold text-[#00932F]">
                                         <MapPinIcon className="size-9 mb-3 text-[#FEC301]" />
-                                        <div className="flex lg:flex-col md:flex-row flex-col lg:gap-0 md:gap-1 text-center">
-                                            <p className="lg:text-2xl text-xl">
+                                        <div className="flex flex-col text-center lg:flex-col md:flex-row lg:gap-0 md:gap-1">
+                                            <p className="text-xl lg:text-2xl">
                                                 MAS RAUDLATUL IRFAN
                                             </p>
-                                            <p className="lg:text-2xl text-xl">
+                                            <p className="text-xl lg:text-2xl">
                                                 TANGERANG
                                             </p>
                                         </div>
                                     </div>
                                     <div className="bg-[#FEC301] h-1 w-full my-4"></div>
                                     <div className="text-center">
-                                        <p className="lg:text-xl text-lg">
+                                        <p className="text-lg lg:text-xl">
                                             Jl. TMP Aria Wangsakara, Kp.
                                             Lengkong Ulama Rt.001/001, Lengkong
                                             Kulon, Pagedangan, Tangerang
