@@ -45,6 +45,10 @@ Route::get('/galeri', function () {
     return Inertia::render('Galeri', ['galeri' => Galeri::all()]);
 });
 
+Route::get('/kontak', function () {
+    return Inertia::render('Kontak');
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     // Main Dashboard
     Route::get('/dashboard', function () {
