@@ -45,7 +45,7 @@ Route::get('/berita/{link_artikel}', function ($link_artikel) {
     // Get the current article
     $currentArtikel = Artikel::where('link_artikel', $link_artikel)->firstOrFail();
 
-    // Get the 2 previous articles based on publication date
+    // Get the 3 previous articles based on publication date
     $previousArticles = Artikel::where('created_at', '<', $currentArtikel->created_at)
         ->orderBy('created_at', 'desc')
         ->take(3)
