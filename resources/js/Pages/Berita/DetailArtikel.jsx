@@ -98,6 +98,7 @@ const DetailArtikel = ({ artikel, previous_articles }) => {
                                     <Card
                                         key={artikels.id}
                                         artikel={artikels}
+                                        className="mt-8"
                                     />
                                 ))}
                             </div>

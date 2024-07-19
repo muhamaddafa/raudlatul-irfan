@@ -2,9 +2,14 @@ import React from "react";
 import { Link } from "@inertiajs/react";
 import Button from "@/Components/Button";
 
-const Card = ({ artikel }) => {
+const Card = ({ artikel, className = "" }) => {
     return (
-        <div className="card lg:flex lg:flex-col md:grid md:grid-cols-5 mt-8 rounded-lg bg-white border md:border-gray-200 border-green-700 md:shadow-xl">
+        <div
+            className={
+                "card lg:flex lg:flex-col md:grid md:grid-cols-5 rounded-lg bg-white border md:border-gray-200 border-green-700 md:shadow-xl " +
+                className
+            }
+        >
             <div className="col-span-2">
                 <img
                     src={`/storage/artikel/${artikel.gambar_artikel}`}
