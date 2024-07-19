@@ -41,6 +41,22 @@ Route::get('/berita', function () {
     return Inertia::render('Berita', ['artikel' => Artikel::all()]);
 });
 
+Route::get('/berita/{link_artikel}', function ($link_artikel) {
+    // Get the current article
+    $currentArtikel = Artikel::where('link_artikel', $link_artikel)->firstOrFail();
+
+    // Get the 2 previous articles based on publication date
+    $previousArticles = Artikel::where('created_at', '<', $currentArtikel->created_at)
+        ->orderBy('created_at', 'desc')
+        ->take(3)
+        ->get();
+
+    return Inertia::render('Berita/DetailArtikel', [
+        'artikel' => $currentArtikel,
+        'previous_articles' => $previousArticles
+    ]);
+});
+
 Route::get('/galeri', function () {
     return Inertia::render('Galeri', ['galeri' => Galeri::all()]);
 });
