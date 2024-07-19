@@ -8,7 +8,7 @@ const NavBar = ({ currentPath }) => {
         <>
             <div className="Navbar fixed w-screen h-20 bg-[#FAFAFA] hidden lg:block shadow-md z-20">
                 <div className="flex mx-8 items-center justify-between h-full items">
-                    <Link href="/" className="flex items-center ml-10 ">
+                    <Link href="#" className="flex items-center ml-10 ">
                         <div className="w-20">
                             <ApplicationLogo />
                         </div>
@@ -38,9 +38,14 @@ const NavBar = ({ currentPath }) => {
                         >
                             Galeri
                         </PageLink>
-                        <PageLink href="" active={currentPath === "ppdb"}>
+                        <a
+                            href="https://linktr.ee/masraudlatulirfan.tng"
+                            target="_blank"
+                            className="inline-flex items-center px-1 pt-1 text-[#1C1B1B] text-xl font-extrabold leading-5 transition duration-150 ease-in-out border-transparent hover:text-gray-700 hover:border-gray-300 focus:text-gray-700 focus:border-gray-300  focus:outline-none"
+                            active={currentPath === "ppdb"}
+                        >
                             PPDB
-                        </PageLink>
+                        </a>
                         <PageLink
                             href="/kontak"
                             active={currentPath === "kontak"}

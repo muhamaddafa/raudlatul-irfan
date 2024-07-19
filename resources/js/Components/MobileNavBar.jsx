@@ -45,12 +45,10 @@ const MobileNavBar = ({ currenPath }) => {
         <>
             <div className="fixed w-full px-8 py-[20px] mobile-navbar lg:hidden md:px-12 z-10 bg-white shadow-md">
                 <div className="flex justify-between navbar ">
-                    <Link href="/">
+                    <Link href="#">
                         <div className="flex items-center gap-4 nama-logo">
                             <div className="lg:mx-10 lg:w-20 w-12">
-                                <Link href="/">
-                                    <ApplicationLogo />
-                                </Link>
+                                <ApplicationLogo />
                             </div>
                             <div className="flex flex-col font-bold text-[#00932F]">
                                 <h1 className="">MAS</h1>
@@ -123,9 +121,14 @@ const MobileNavBar = ({ currenPath }) => {
                     >
                         Galeri
                     </MobilePageLink>
-                    <MobilePageLink href="/ppdb" active={currenPath === "ppdb"}>
+                    <a
+                        href="https://linktr.ee/masraudlatulirfan.tng"
+                        target="_blank"
+                        className="flex items-center font-semibold justify-end gap-10 text-black md:text-2xl duration-150 hover:text-[#00932F] hover:scale-90 hover:duration-150"
+                        active={currenPath === "ppdb"}
+                    >
                         PPDB
-                    </MobilePageLink>
+                    </a>
                     <MobilePageLink
                         href="/kontak"
                         active={currenPath === "kontak"}
