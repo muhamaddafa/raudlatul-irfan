@@ -4,10 +4,9 @@ import moment from "moment";
 import "moment/locale/id";
 import ContainerLayout from "@/Layouts/ContainerLayout";
 import PageLayout from "@/Layouts/PageLayout";
-import Button from "@/Components/Button";
+import Card from "@/Components/Card";
 import Footer from "@/Components/Footer";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import ReactMarkdown from "react-markdown";
 
 const DetailArtikel = ({ artikel, previous_articles }) => {
@@ -94,42 +93,14 @@ const DetailArtikel = ({ artikel, previous_articles }) => {
                             </h2>
                         </div>
                         <div className="lg:col-span-3">
-                            {artikels.map((artikels) => (
-                                <div
-                                    key={artikels.id}
-                                    className="card lg:flex lg:flex-col md:grid md:grid-cols-5 mt-8 gap-2 rounded-lg bg-white border border-gray-200 shadow-xl"
-                                >
-                                    <div className="col-span-2">
-                                        <img
-                                            src={`/storage/artikel/${artikels.gambar_artikel}`}
-                                            alt={artikels.judul_artikel}
-                                            className="w-full lg:h-[240px] md:h-[270px] h-[200px] object-cover lg:rounded-t-lg lg:rounded-b-none md:rounded-l-lg md:rounded-r-none rounded-t-lg"
-                                        />
-                                    </div>
-                                    <div className="col-span-3 flex flex-col justify-between p-4">
-                                        <div className="flex flex-col gap-2">
-                                            <h3 className="lg:text-xl text-base font-extrabold text-[#00923F]">
-                                                {artikels.kategori_artikel}
-                                            </h3>
-                                            <h3 className="lg:text-3xl text-lg font-extrabold line-clamp-2">
-                                                {artikels.judul_artikel}
-                                            </h3>
-                                            <p className="text-gray-500 font-extrabold lg:text-base text-sm line-clamp-4">
-                                                {artikels.isi_artikel}
-                                            </p>
-                                        </div>
-                                        <div className="flex justify-end my-2">
-                                            <Link
-                                                href={`/berita/${artikels.link_artikel}`}
-                                            >
-                                                <Button className="px-4 py-1 mt-2 lg:text-lg text-base font-semibold">
-                                                    Selengkapnya
-                                                </Button>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
+                            <div className="mt-8">
+                                {artikels.map((artikels) => (
+                                    <Card
+                                        key={artikels.id}
+                                        artikel={artikels}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </ContainerLayout>
