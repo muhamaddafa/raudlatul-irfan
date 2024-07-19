@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContainerLayout from "@/Layouts/ContainerLayout";
 import PageLayout from "@/Layouts/PageLayout";
-import Button from "@/Components/Button";
+import Card from "@/Components/Card";
 import Footer from "@/Components/Footer";
 import Pagination from "@/Components/Pagination";
 import Slider from "react-slick";
@@ -56,7 +56,7 @@ const Berita = (props) => {
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     dots: true, // dots on mobile devices
-                    infinite: true,
+                    infinite: artikel.length > 1,
                 },
             },
         ],
@@ -92,40 +92,13 @@ const Berita = (props) => {
                     </div>
                     {/* desktop and tablet view*/}
                     <div className="hidden lg:block md:block">
-                        <div className="grid lg:grid-cols-3 gap-8 lg:mt-8 mt-6">
+                        <div className="grid lg:grid-cols-4 gap-8 lg:mt-8 mt-6">
                             {artikel.map((artikel) => (
-                                <div
+                                <Card
                                     key={artikel.id}
-                                    className="flex lg:flex-col rounded-lg bg-white shadow-xl border-gray-500"
-                                >
-                                    <img
-                                        src={`/storage/artikel/${artikel.gambar_artikel}`}
-                                        alt={artikel.judul_artikel}
-                                        className="w-full h-[240px] object-cover rounded-t-lg"
-                                    />
-                                    <div className="flex flex-col gap-2 p-4">
-                                        <h3 className="lg:text-xl text-base font-extrabold text-[#00923F]">
-                                            {artikel.kategori_artikel}
-                                        </h3>
-                                        <h3 className="lg:text-3xl text-lg font-extrabold">
-                                            {artikel.judul_artikel}
-                                        </h3>
-                                        <p className="text-gray-500 font-extrabold lg:text-base text-sm">
-                                            {artikel.isi_artikel.substring(
-                                                0,
-                                                500
-                                            )}
-                                            ...
-                                        </p>
-                                        <div className="flex justify-end">
-                                            <a href={artikel.link_artikel}>
-                                                <Button className="px-4 py-1 mt-2 lg:text-lg text-base font-semibold">
-                                                    Selengkapnya
-                                                </Button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    artikel={artikel}
+                                    className="shadow-xl"
+                                />
                             ))}
                         </div>
                     </div>
@@ -133,38 +106,11 @@ const Berita = (props) => {
                     <div className="block md:hidden">
                         <Slider {...settings}>
                             {artikel.map((artikel) => (
-                                <div
+                                <Card
                                     key={artikel.id}
-                                    className="flex flex-col rounded-lg bg-white border-2 border-green-700"
-                                >
-                                    <img
-                                        src={`/storage/artikel/${artikel.gambar_artikel}`}
-                                        alt={artikel.judul_artikel}
-                                        className="h-[220px] w-full object-cover rounded-t-lg"
-                                    />
-                                    <div className="flex flex-col gap-2 p-4">
-                                        <h3 className="lg:text-xl text-base font-extrabold text-[#00923F]">
-                                            {artikel.kategori_artikel}
-                                        </h3>
-                                        <h3 className="lg:text-3xl text-lg font-extrabold">
-                                            {artikel.judul_artikel}
-                                        </h3>
-                                        <p className="text-gray-500 font-extrabold lg:text-base text-sm">
-                                            {artikel.isi_artikel.substring(
-                                                0,
-                                                350
-                                            )}
-                                            ...
-                                        </p>
-                                        <div className="flex justify-end">
-                                            <a href={artikel.link_artikel}>
-                                                <Button className="px-4 py-1 mt-2 lg:text-lg text-base font-semibold">
-                                                    Selengkapnya
-                                                </Button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    artikel={artikel}
+                                    className="border-green-700"
+                                />
                             ))}
                         </Slider>
                     </div>
