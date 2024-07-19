@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "@inertiajs/react";
 import PageLayout from "@/Layouts/PageLayout";
 import ContainerLayout from "@/Layouts/ContainerLayout";
+import Card from "@/Components/Card";
 import Button from "@/Components/Button";
 import Footer from "@/Components/Footer";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
@@ -97,7 +98,7 @@ const Home = (props) => {
                             </h2>
                             <p className="bg-[#FEC301] h-1 flex-grow"></p>
                         </div>
-                        <div className="mt-4 flex lg:flex-row flex-col lg:gap-24 gap-14 justify-center">
+                        <div className="mt-4 flex lg:flex-row flex-col lg:gap-24 gap-8 justify-center">
                             <div className="w-full flex justify-center">
                                 <div className="relative">
                                     <img
@@ -105,14 +106,14 @@ const Home = (props) => {
                                         src={`/storage/img/kamad.jpg`}
                                         alt="KEPALA MADRASAH"
                                     />
-                                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#00923F] text-white lg:text-xl text-lg px-2 py-2 rounded-lg w-full">
+                                    <div className="absolute bottom-0 left-0 w-full bg-[#00923F] text-white lg:text-xl text-lg px-2 py-2 rounded-lg">
                                         <p className="text-center whitespace-nowrap">
                                             Muhibudin, S.Th.I., M.M.
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-col lg:text-xl text-base font-extrabold gap-8">
+                            <div className="flex flex-col lg:text-xl text-base justify-center font-extrabold gap-4">
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur.
                                     Tempor nisi fringilla arcu quam venenatis
@@ -149,47 +150,16 @@ const Home = (props) => {
                         </div>
                         <Link
                             href="/berita"
-                            className="flex items-center gap-2 text-[#00923F] lg:text-xl text-lg font-extrabold hover:text-green-500 hover:border-gray-300 focus:text-gray-700 focus:border-gray-300"
+                            className="flex items-center gap-2 mb-6 text-[#00923F] lg:text-xl text-lg font-extrabold hover:text-green-500 hover:border-gray-300 focus:text-gray-700 focus:border-gray-300"
                         >
                             Lihat Semua Artikel
                             <ChevronRightIcon className="size-4" />
                         </Link>
-                        <div className="hidden md:block">
-                            {/* desktop and tablet view */}
-                            <div className="grid lg:grid-cols-3 gap-8 lg:mt-8 mt-6">
+                        {/* desktop and tablet view*/}
+                        <div className="hidden lg:block md:block">
+                            <div className="grid lg:grid-cols-4 gap-8 lg:mt-8 mt-6">
                                 {artikel.map((artikel) => (
-                                    <div
-                                        key={artikel.id}
-                                        className="flex lg:flex-col rounded-lg bg-white shadow-xl border-gray-500"
-                                    >
-                                        <img
-                                            src={`/storage/artikel/${artikel.gambar_artikel}`}
-                                            alt={artikel.judul_artikel}
-                                            className="w-full h-[240px] object-cover rounded-t-lg"
-                                        />
-                                        <div className="flex flex-col gap-2 p-4">
-                                            <h3 className="lg:text-xl text-base font-extrabold text-[#00923F]">
-                                                {artikel.kategori_artikel}
-                                            </h3>
-                                            <h3 className="lg:text-3xl text-lg font-extrabold">
-                                                {artikel.judul_artikel}
-                                            </h3>
-                                            <p className="text-gray-500 font-extrabold lg:text-base text-sm">
-                                                {artikel.isi_artikel.substring(
-                                                    0,
-                                                    500
-                                                )}
-                                                ...
-                                            </p>
-                                            <div className="flex justify-end">
-                                                <a href={artikel.link_artikel}>
-                                                    <Button className="px-4 py-1 mt-2 lg:text-lg text-base font-semibold">
-                                                        Selengkapnya
-                                                    </Button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <Card key={artikel.id} artikel={artikel} />
                                 ))}
                             </div>
                         </div>
@@ -197,38 +167,7 @@ const Home = (props) => {
                         <div className="block md:hidden">
                             <Slider {...settings}>
                                 {artikel.map((artikel) => (
-                                    <div
-                                        key={artikel.id}
-                                        className="flex flex-col rounded-lg bg-white mt-6 border-2 border-green-700"
-                                    >
-                                        <img
-                                            src={`/storage/artikel/${artikel.gambar_artikel}`}
-                                            alt={artikel.judul_artikel}
-                                            className="h-[220px] w-full object-cover rounded-t-lg"
-                                        />
-                                        <div className="flex flex-col gap-2 p-4">
-                                            <h3 className="lg:text-xl text-base font-extrabold text-[#00923F]">
-                                                {artikel.kategori_artikel}
-                                            </h3>
-                                            <h3 className="lg:text-3xl text-lg font-extrabold">
-                                                {artikel.judul_artikel}
-                                            </h3>
-                                            <p className="text-gray-500 font-extrabold lg:text-base text-sm">
-                                                {artikel.isi_artikel.substring(
-                                                    0,
-                                                    350
-                                                )}
-                                                ...
-                                            </p>
-                                            <div className="flex justify-end">
-                                                <a href={artikel.link_artikel}>
-                                                    <Button className="px-4 py-1 mt-2 lg:text-lg text-base font-semibold">
-                                                        Selengkapnya
-                                                    </Button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <Card key={artikel.id} artikel={artikel} />
                                 ))}
                             </Slider>
                         </div>
@@ -250,7 +189,7 @@ const Home = (props) => {
                             Lihat Semua Galeri
                             <ChevronRightIcon className="size-4" />
                         </Link>
-                        <div className="mt-2">
+                        <div className="mt-5">
                             <ResponsiveMasonry
                                 columnsCountBreakPoints={{
                                     350: 2,
@@ -262,7 +201,7 @@ const Home = (props) => {
                                     {galeri.map((galeri) => (
                                         <div
                                             key={galeri.id}
-                                            className="m-4 shadow-xl rounded-xl"
+                                            className="md:m-4 m-2 shadow-xl rounded-xl"
                                         >
                                             <img
                                                 src={`/storage/galeri/${galeri.gambar_galeri}`}
