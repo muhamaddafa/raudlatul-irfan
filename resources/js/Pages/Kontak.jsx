@@ -126,7 +126,7 @@ const Kontak = () => {
             <div className="relative">
                 <img
                     className="absolute inset-0 object-cover w-full h-full"
-                    src={`/storage/img/demo(1).jpg`}
+                    src={`/storage/img/header.jpg`}
                     alt="Background"
                 />
                 <div className="relative flex flex-col justify-center bg-black bg-opacity-70 min-h-screen text-white">

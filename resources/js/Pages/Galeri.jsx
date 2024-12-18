@@ -44,13 +44,13 @@ const Galeri = () => {
                     <div className="relative w-full h-auto">
                         <div className="absolute inset-0 bg-black opacity-70 rounded-3xl"></div>
                         <img
-                            src={`/storage/img/demo(1).jpg`}
+                            src={`/storage/img/header.jpg`}
                             alt="HOME"
                             className="absolute inset-0 w-full h-full object-cover rounded-3xl -z-10"
                         />
-                        <div className="relative lg:p-40 md:p-32 p-16">
+                        <div className="relative md:p-32 p-16">
                             <p className="md:text-6xl text-4xl text-center text-white font-extrabold ">
-                                STUDY
+                                GALLERY
                             </p>
                         </div>
                     </div>

@@ -34,7 +34,7 @@ Route::get('/', function () {
 });
 
 Route::get('/info', function () {
-    return Inertia::render('Info', ['ekskul' => Ekskul::all()]);
+    return Inertia::render('Info', ['ekskul' => Ekskul::all(), 'galeri' => Galeri::all()]);
 });
 
 Route::get('/berita', function () {

@@ -63,7 +63,7 @@ const Home = (props) => {
                     <section className="relative w-full h-auto">
                         <div className="absolute inset-0 bg-black opacity-70 rounded-3xl"></div>
                         <img
-                            src={`/storage/img/demo(1).jpg`}
+                            src={`/storage/img/header.jpg`}
                             alt="HOME"
                             className="absolute inset-0 w-full h-full object-cover rounded-3xl -z-10"
                         />
@@ -98,11 +98,11 @@ const Home = (props) => {
                             </h2>
                             <p className="bg-[#FEC301] h-1 flex-grow"></p>
                         </div>
-                        <div className="mt-4 flex lg:flex-row flex-col lg:gap-24 gap-8 justify-center">
+                        <div className="mt-4 flex lg:flex-row flex-col lg:gap-2 gap-8 justify-center">
                             <div className="w-full flex justify-center">
                                 <div className="relative">
                                     <img
-                                        className="lg:w-[260px] lg:h-[300px] w-[240px] h-[250px] object-cover rounded-lg mx-auto"
+                                        className="lg:w-[280px] lg:h-full w-[240px] h-full object-cover rounded-lg mx-auto"
                                         src={`/storage/img/kamad.jpg`}
                                         alt="KEPALA MADRASAH"
                                     />
@@ -113,27 +113,52 @@ const Home = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-col lg:text-xl text-base justify-center font-extrabold gap-4">
+                            <div className="flex flex-col lg:text-xl text-base justify-center font-extrabold gap-2 ms-4 text-justify">
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur.
-                                    Tempor nisi fringilla arcu quam venenatis
-                                    arcu. Vitae est ut cursus condimentum
-                                    egestas. Odio massa consectetur accumsan
-                                    lacus eu rutrum. Adipiscing sed aliquam
-                                    posuere mauris non nisi. Tempor risus sed et
-                                    vitae viverra volutpat
+                                    Teriring puja dan puji syukur kepada Allah
+                                    SWT, atas segala karunia dan kelimpahan
+                                    rizeki yang telah diberikan kepada kita
+                                    semua. Shalawat teriring salam terlimpah
+                                    kepada Nabi Muhammad SAW.
                                 </p>
                                 <p>
-                                    Velit vitae ut adipiscing ac quis sed.
-                                    Tempor gravida sit sed nulla ipsum aliquet
-                                    sagittis enim eu. Duis faucibus at non
-                                    feugiat. Fermentum scelerisque pulvinar
-                                    vestibulum vitae faucibus at ipsum eu
-                                    auctor. Nullam sit scelerisque facilisis
-                                    euismod scelerisque. Urna volutpat mauris
-                                    blandit malesuada at non eleifend blandit.
-                                    Nisl nunc in quis magna dignissim. Fermentum
-                                    scelerisque pulvinar vestibulum vitae
+                                    Merupakan suatu kehormatan bagi saya untuk
+                                    mengemban tanggung jawab dalam merintis dan
+                                    memimpin sekolah yang bernama MAS Raudlatul
+                                    Irfan Kec. Pagedangan Kabupaten Tangerang.
+                                    Sekolah ini memiliki visi yang luar biasa
+                                    yaitu terwujudnya siswa yang cerdas, trampil
+                                    dan berakhlak mulia.
+                                </p>
+                                <p>
+                                    Salam sambutan kami tidak akan pernah cukup
+                                    untuk menjelaskan semua informasi tentang
+                                    sekolah. Sejak berdiri tahun 1987, MAS
+                                    Raudlatul Irfan berkomitmen untuk terus
+                                    meningkatkan kualitas dan standarnya.
+                                </p>
+                                <p>
+                                    Sebagai komunitas orang tua, siswa, guru,
+                                    dan staf, kami yakin mampu mempromosikan
+                                    kemitraan yang efektif untuk mendorong
+                                    lingkungan belajar yang aman dan produktif
+                                    dalam pendidikan. Kolaborasi tersebut
+                                    bertujuan untuk memfasilitasi lebih jauh
+                                    peluang setiap orang untuk mencapai yang
+                                    terbaik dan sukses dalam perjalanan
+                                    pembelajaran serta mengembangkan kemampuan
+                                    kreatif individu. Memiliki dukungan kuat
+                                    dari pendiri sekolah dan kombinasi kemitraan
+                                    yang efektif, kami berharap dapat dipercaya
+                                    dilingkungan kami. Marilah bergabung menjadi
+                                    bagian dari MAS Raudlatul Irfan, di mana
+                                    kami dapat berbagi semangat untuk mendidik
+                                    calon pemimpin masa depan dengan karakter
+                                    Islami yang kokoh yang akan memberikan
+                                    kontribusi yang signifikan dan positif bagi
+                                    masyarakat, insyaAllah. Semoga Allah
+                                    meridhoi setiap langkah kita dengan berkah
+                                    dengan ketentuan-Nya. Aamiin.
                                 </p>
                             </div>
                         </div>
