@@ -69,7 +69,7 @@ const Berita = (props) => {
                     <div className="relative w-full h-auto">
                         <div className="absolute inset-0 bg-black opacity-70 rounded-3xl"></div>
                         <img
-                            src={`/storage/img/demo(1).jpg`}
+                            src={`/storage/img/header.jpg`}
                             alt="HOME"
                             className="absolute inset-0 w-full h-full object-cover rounded-3xl -z-10"
                         />
